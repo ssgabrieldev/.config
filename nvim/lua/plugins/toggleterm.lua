@@ -107,7 +107,7 @@ return {
         {
             "<leader>tf",
             function()
-                vim.cmd(vim.v.count + 1000 .. "ToggleTerm direction=float")
+                vim.cmd(vim.v.count .. "ToggleTerm direction=float")
             end,
             mode = { "n", "t" },
             desc = "Toggle float terminals",
