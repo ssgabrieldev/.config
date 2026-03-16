@@ -107,7 +107,14 @@ return {
         {
             "<leader>tf",
             function()
-                vim.cmd(vim.v.count .. "ToggleTerm direction=float")
+                local toggle_terminal = require("toggleterm.terminal")
+
+                toggle_terminal.Terminal:new({
+                    id = 1000 + vim.v.count,
+                    count = 1000 + vim.v.count,
+                    hidden = true,
+                    direction = "float"
+                }):toggle()
             end,
             mode = { "n", "t" },
             desc = "Toggle float terminals",
