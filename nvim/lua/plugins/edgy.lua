@@ -103,9 +103,9 @@ return {
         },
         top = {},
         options = {
-            left = { size = 45 },
+            left = { size = 40 },
             bottom = { size = 15 },
-            right = { size = 45 },
+            right = { size = 40 },
             top = { size = 0 },
         },
         animate = {
