@@ -3,8 +3,6 @@ local vim = vim
 local function get_toggleterm_winbar()
     local toggle_terminal = require("toggleterm.terminal")
     local bufs = vim.api.nvim_list_bufs()
-    local current_buf = vim.api.nvim_get_current_buf()
-    local current_win = vim.g.actual_curwin
     local items = {}
 
     for _, buf in ipairs(bufs) do
@@ -14,13 +12,8 @@ local function get_toggleterm_winbar()
             local term = toggle_terminal.get(id)
 
             if term then
-                -- print(type(current_win) .. " " .. type(term.window))
-
                 local name = "   " .. (term.name or term.count) .. "  "
-                local hl_active = "%#BufferLineBufferSelected#"
-                local hl_inactive = "%#BufferLineBackground#"
-                local hl = buf == current_buf and hl_active or hl_inactive
-                hl = term.window ~= tonumber(current_win) and hl_inactive or hl
+                local hl = term:is_open() and  "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
 
                 table.insert(items, hl .. name)
             end
