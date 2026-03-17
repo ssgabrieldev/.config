@@ -34,6 +34,11 @@ return {
                 "node_modules",
                 ".git/"
             },
+            mappings = {
+                n = {
+                    ["<leader><leader>"] = require("telescope.actions").close
+                }
+            }
         },
         pickers = {
             buffers = {

@@ -98,8 +98,7 @@ return {
     keys = {
         {
             "<leader>tt",
-            toggle_terminals
-            ,
+            toggle_terminals,
             mode = { "n", "t" },
             desc = "Toggle horizontal terminals",
             silent = true

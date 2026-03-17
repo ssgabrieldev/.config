@@ -1,9 +1,10 @@
 local keymap_set = vim.keymap.set
 
 -- Terminal
-keymap_set({ "t" }, "<leader><esc>", "<c-\\><c-n>", { silent = true, desc = "Exit terminal mode" })
+keymap_set({ "t" }, "<leader><leader>", "<c-\\><c-n>", { silent = true, desc = "Exit terminal mode" })
 
 -- Navigation
+keymap_set({ "n", "i", "v", "c" }, "<leader><leader>", "<esc>", { silent = false, desc = "Nomal mode" })
 keymap_set({ 'n', 'v' }, 'k', 'gk', { silent = true, desc = "Soft wrap up" })
 keymap_set({ 'n', 'v' }, 'j', 'gj', { silent = true, desc = "Soft wrap down" })
 
