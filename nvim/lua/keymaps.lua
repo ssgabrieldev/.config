@@ -9,6 +9,8 @@ keymap_set({ 'n', 'v' }, 'k', 'gk', { silent = true, desc = "Soft wrap up" })
 keymap_set({ 'n', 'v' }, 'j', 'gj', { silent = true, desc = "Soft wrap down" })
 
 -- Window
+keymap_set({ "n" }, "<leader>qq", "<cmd>q<CR>", { silent = true, desc = "Close window" })
+keymap_set({ "n" }, "<leader>qa", "<cmd>qa<CR>", { silent = true, desc = "Close all windows" })
 keymap_set({ "n" }, "<A-h>", "<cmd>vertical resize -2<CR>", { silent = true, desc = "Decrease window width" })
 keymap_set({ "n" }, "<A-l>", "<cmd>vertical resize +2<CR>", { silent = true, desc = "Increase window width" })
 keymap_set({ "n" }, "<A-j>", "<cmd>resize -2<CR>", { silent = true, desc = "Decrease window height" })
@@ -73,4 +75,6 @@ keymap_set({ "n" }, "<leader>vap", "va(", { silent = true, desc = "Select includ
 keymap_set({ "n" }, "<leader>vac", "va`", { silent = true, desc = "Select including crasis" })
 
 -- Files
+keymap_set({ "n" }, "<leader>ww", "<cmd>w<CR>", { silent = true, desc = "Write buffer" })
+keymap_set({ "n" }, "<leader>wa", "<cmd>wa<CR>", { silent = true, desc = "Write all buffers" })
 keymap_set({ "n" }, "<leader>so", "<cmd>source %<cr>", { silent = true, desc = "Source current file" })
