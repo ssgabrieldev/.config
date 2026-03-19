@@ -13,7 +13,7 @@ local function get_toggleterm_winbar()
 
             if term then
                 local name = "   " .. (term.name or term.count) .. "  "
-                local hl = term:is_open() and  "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
+                local hl = term:is_open() and "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
 
                 table.insert(items, hl .. name)
             end
@@ -103,9 +103,30 @@ return {
         },
         top = {},
         options = {
-            left = { size = 40 },
-            bottom = { size = 15 },
-            right = { size = 40 },
+            left = {
+                size = function()
+                    local f = (20 * vim.o.columns) / 100
+                    local i, _ = math.modf(f)
+
+                    return i
+                end
+            },
+            bottom = {
+                size = function()
+                    local f = (40 * vim.o.lines) / 100
+                    local i, _ = math.modf(f)
+
+                    return i
+                end
+            },
+            right = {
+                size = function()
+                    local f = (21 * vim.o.columns) / 100
+                    local i, _ = math.modf(f)
+
+                    return i
+                end
+            },
             top = { size = 0 },
         },
         animate = {
