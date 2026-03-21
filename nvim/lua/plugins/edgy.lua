@@ -1,150 +1,165 @@
 local vim = vim
 
 local function get_toggleterm_winbar()
-    local toggle_terminal = require("toggleterm.terminal")
-    local bufs = vim.api.nvim_list_bufs()
-    local items = {}
+  local toggle_terminal = require("toggleterm.terminal")
+  local bufs = vim.api.nvim_list_bufs()
+  local items = {}
 
-    for _, buf in ipairs(bufs) do
-        local id = vim.b[buf].toggle_number
+  for _, buf in ipairs(bufs) do
+    local id = vim.b[buf].toggle_number
 
-        if id ~= nil then
-            local term = toggle_terminal.get(id)
+    if id ~= nil then
+      local term = toggle_terminal.get(id)
 
-            if term then
-                local name = "   " .. (term.name or term.count) .. "  "
-                local hl = term:is_open() and "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
+      if term then
+        local name = "   " .. (term.name or term.count) .. "  "
+        local hl = term:is_open() and "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
 
-                table.insert(items, hl .. name)
-            end
-        end
+        table.insert(items, hl .. name)
+      end
     end
+  end
 
-    local winbar = "%*" .. table.concat(items, "") .. "%#BufferLineFill#"
+  local winbar = "%*" .. table.concat(items, "") .. "%#BufferLineFill#"
 
-    return winbar
+  return winbar
 end
 
 _G.custom_toggleterm_bar = get_toggleterm_winbar
 
 return {
-    "folke/edgy.nvim",
-    event = "VeryLazy",
-    opts = {
-        fix_win_height = true,
-        left = {
-            {
-                ft = "NvimTree",
-                wo = {
-                    winfixbuf = false,
-                    winbar = false
-                }
-            }
-        },
-        bottom = {
-            {
-                ft = "toggleterm",
-                filter = function(buf, win)
-                    return vim.api.nvim_win_get_config(win).relative == ""
-                end,
-                wo = {
-                    winfixbuf = true,
-                    winbar = "%{%v:lua.custom_toggleterm_bar()%}",
-                },
-            },
-            {
-                ft = "dap-view://main",
-                wo = {
-                    winfixbuf = true,
-                    winbar = false
-                }
-            },
-            {
-                ft = "dap-view-term",
-                wo = {
-                    winfixbuf = true,
-                    winbar = false
-                }
-            },
-            {
-                ft = "dap-view",
-                wo = {
-                    winfixbuf = true,
-                    winbar = false
-                }
-            },
-            {
-                ft = "dap-repl",
-                wo = {
-                    winfixbuf = true,
-                    winbar = false
-                }
-            },
-            {
-                ft = "qf",
-                wo = {
-                    winfixbuf = true
-                }
-            },
-            {
-                ft = "help",
-                wo = {
-                    winfixbuf = true
-                }
-            },
-        },
-        right = {
-            {
-                ft = "codecompanion",
-                wo = {
-                    winfixbuf = true
-                }
-            },
-        },
-        top = {},
-        options = {
-            left = {
-                size = function()
-                    local f = (20 * vim.o.columns) / 100
-                    local i, _ = math.modf(f)
-
-                    return i
-                end
-            },
-            bottom = {
-                size = function()
-                    local f = (40 * vim.o.lines) / 100
-                    local i, _ = math.modf(f)
-
-                    return i
-                end
-            },
-            right = {
-                size = function()
-                    local f = (21 * vim.o.columns) / 100
-                    local i, _ = math.modf(f)
-
-                    return i
-                end
-            },
-            top = { size = 0 },
-        },
-        animate = {
-            enabled = false
-        },
-        keys = {
-            ["<a-l>"] = function(win)
-                win:resize("width", 2)
-            end,
-            ["<a-h>"] = function(win)
-                win:resize("width", -2)
-            end,
-            ["<a-k>"] = function(win)
-                win:resize("height", 2)
-            end,
-            ["<a-j>"] = function(win)
-                win:resize("height", -2)
-            end,
+  "folke/edgy.nvim",
+  event = "VeryLazy",
+  opts = {
+    fix_win_height = true,
+    left = {
+      {
+        ft = "NvimTree",
+        wo = {
+          winfixbuf = false,
+          winbar = false
         }
+      }
     },
+    bottom = {
+      {
+        ft = "toggleterm",
+        filter = function(buf, win)
+          return vim.api.nvim_win_get_config(win).relative == ""
+        end,
+        wo = {
+          winfixbuf = true,
+          winbar = "%{%v:lua.custom_toggleterm_bar()%}",
+        },
+      },
+      {
+        ft = "dap-view://main",
+        wo = {
+          winfixbuf = true,
+          winbar = false
+        }
+      },
+      {
+        ft = "dap-view-term",
+        wo = {
+          winfixbuf = true,
+          winbar = false
+        }
+      },
+      {
+        ft = "dap-view",
+        wo = {
+          winfixbuf = true,
+          winbar = false
+        }
+      },
+      {
+        ft = "dap-repl",
+        wo = {
+          winfixbuf = true,
+          winbar = false
+        }
+      },
+      {
+        ft = "qf",
+        wo = {
+          winfixbuf = true
+        }
+      },
+      {
+        ft = "help",
+        wo = {
+          winfixbuf = true
+        }
+      },
+    },
+    right = {
+      {
+        ft = "codecompanion",
+        wo = {
+          winfixbuf = true
+        }
+      },
+    },
+    top = {},
+    options = {
+      left = {
+        size = function()
+          local f = (20 * vim.o.columns) / 100
+          local i, _ = math.modf(f)
+          local min = 30
+
+          if i < min then
+            return min
+          end
+
+          return i
+        end
+      },
+      bottom = {
+        size = function()
+          local f = (40 * vim.o.lines) / 100
+          local i, _ = math.modf(f)
+          local min = 18
+
+          if i < min then
+            return min
+          end
+
+          return i
+        end
+      },
+      right = {
+        size = function()
+          local f = (21 * vim.o.columns) / 100
+          local i, _ = math.modf(f)
+          local min = 30
+
+          if i < min then
+            return min
+          end
+
+          return i
+        end
+      },
+      top = { size = 0 },
+    },
+    animate = {
+      enabled = false
+    },
+    keys = {
+      ["<a-l>"] = function(win)
+        win:resize("width", 2)
+      end,
+      ["<a-h>"] = function(win)
+        win:resize("width", -2)
+      end,
+      ["<a-k>"] = function(win)
+        win:resize("height", 2)
+      end,
+      ["<a-j>"] = function(win)
+        win:resize("height", -2)
+      end,
+    }
+  },
 }
