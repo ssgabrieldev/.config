@@ -45,7 +45,7 @@ vim.wo.wrap = false
 vim.wo.number = true
 vim.wo.relativenumber = true
 
-local tab_len = 4
+local tab_len = 2
 vim.opt.splitkeep = "screen"
 vim.opt.termguicolors = true
 vim.opt.mouse = ""
