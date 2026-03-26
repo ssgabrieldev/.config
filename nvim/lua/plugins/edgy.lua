@@ -1,5 +1,5 @@
 local vim = vim
-local common_panel_highlight =  "EndOfBuffer:NvimTreeEndOfBuffer,Normal:NvimTreeNormal,CursorLine:CursorLine"
+local common_panel_highlight = "EndOfBuffer:NvimTreeEndOfBuffer,Normal:NvimTreeNormal,CursorLine:CursorLine"
 
 local function get_toggleterm_winbar()
   local toggle_terminal = require("toggleterm.terminal")
@@ -13,7 +13,7 @@ local function get_toggleterm_winbar()
       local term = toggle_terminal.get(id)
 
       if term then
-        local name = "   " .. (term.name or term.count) .. "  "
+        local name = "   " .. term.id .. ":" .. vim.split(term.name, "#")[1] .. "  "
         local hl = term:is_open() and "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
 
         table.insert(items, hl .. name)
