@@ -1,4 +1,5 @@
 local vim = vim
+local common_panel_highlight =  "EndOfBuffer:NvimTreeEndOfBuffer,Normal:NvimTreeNormal,CursorLine:CursorLine"
 
 local function get_toggleterm_winbar()
   local toggle_terminal = require("toggleterm.terminal")
@@ -56,40 +57,48 @@ return {
         ft = "dap-view://main",
         wo = {
           winfixbuf = true,
-          winbar = false
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
       {
         ft = "dap-view-term",
         wo = {
           winfixbuf = true,
-          winbar = false
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
       {
         ft = "dap-view",
         wo = {
           winfixbuf = true,
-          winbar = false
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
       {
         ft = "dap-repl",
         wo = {
           winfixbuf = true,
-          winbar = false
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
       {
         ft = "qf",
         wo = {
-          winfixbuf = true
+          winfixbuf = true,
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
       {
         ft = "help",
         wo = {
-          winfixbuf = true
+          winfixbuf = true,
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
     },
@@ -97,7 +106,9 @@ return {
       {
         ft = "codecompanion",
         wo = {
-          winfixbuf = true
+          winfixbuf = true,
+          winbar = false,
+          winhighlight = common_panel_highlight
         }
       },
     },
@@ -120,7 +131,7 @@ return {
         size = function()
           local f = (40 * vim.o.lines) / 100
           local i, _ = math.modf(f)
-          local min = 18
+          local min = 16
 
           if i < min then
             return min
