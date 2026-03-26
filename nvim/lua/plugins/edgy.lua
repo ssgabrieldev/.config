@@ -13,7 +13,7 @@ local function get_toggleterm_winbar()
       local term = toggle_terminal.get(id)
 
       if term then
-        local name = "   " .. term.id .. ":" .. vim.split(term.name, "#")[1] .. "  "
+        local name = "   " .. term.id .. ":" .. vim.split(term.name, ";#")[1] .. "  "
         local hl = term:is_open() and "%#BufferLineBufferSelected#" or "%#BufferLineBackground#"
 
         table.insert(items, hl .. name)
