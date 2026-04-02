@@ -26,6 +26,8 @@ return {
         }
       },
       code_blocks = {
+        pad_amount = 0,
+        wrap = true,
         sign = false,
         style = "block",
         label_direction = "right"
