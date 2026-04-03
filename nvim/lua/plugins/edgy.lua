@@ -37,7 +37,7 @@ return {
       {
         ft = "NvimTree",
         wo = {
-          winfixbuf = false,
+          winfixbuf = true,
           winbar = false
         }
       }
