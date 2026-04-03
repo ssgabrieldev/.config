@@ -9,8 +9,8 @@ return {
     end
   },
   {
-    -- "ssgabrieldev/knot.nvim",
-    dir = "~/Documentos/my/dev/knot.nvim",
+    "ssgabrieldev/knot.nvim",
+    -- dir = "~/Documentos/my/dev/knot.nvim",
     enabled = true,
     lazy = false,
     priority = 1000,

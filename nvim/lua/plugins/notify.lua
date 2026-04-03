@@ -3,7 +3,7 @@ return {
   opts = {
     background_colour = "#000000",
     stages = "static",
-    timeout = 1500,
+    timeout = 2500,
     max_width = 45,
     top_down = false,
     render = "wrapped-compact",
