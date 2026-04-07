@@ -51,6 +51,7 @@ return {
         wo = {
           winfixbuf = true,
           winbar = "%{%v:lua.custom_toggleterm_bar()%}",
+          winhighlight = common_panel_highlight
         },
       },
       {
