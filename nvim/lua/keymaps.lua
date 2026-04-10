@@ -1,15 +1,15 @@
 local vim = vim
 local keymap_set = vim.keymap.set
 
--- Terminal
+-- TERMINAL
 keymap_set({ "t" }, "<leader><leader>", "<c-\\><c-n>", { silent = true, desc = "Exit terminal mode" })
 
--- Navigation
+-- NAVIGATION
 keymap_set({ "n", "i", "v", "c" }, "<leader><leader>", "<esc>", { silent = false, desc = "Nomal mode" })
 keymap_set({ 'n', 'v' }, 'k', 'gk', { silent = true, desc = "Soft wrap up" })
 keymap_set({ 'n', 'v' }, 'j', 'gj', { silent = true, desc = "Soft wrap down" })
 
--- Window
+-- WINDOW
 keymap_set({ "n" }, "<leader>qq", "<cmd>q<CR>", { silent = true, desc = "Close window" })
 keymap_set({ "n" }, "<leader>qa", "<cmd>qa<CR>", { silent = true, desc = "Close all windows" })
 keymap_set({ "n" }, "<A-h>", "<cmd>vertical resize -2<CR>", { silent = true, desc = "Decrease window width" })
@@ -31,43 +31,42 @@ keymap_set({ "n", "t" }, "<leader>wl", "<cmd>wincmd l<cr>", { silent = true, des
 keymap_set({ "v" }, "<leader>y", "\"+y", { silent = true, desc = "Yank to clipboard" })
 keymap_set({ "v", "n" }, "<leader>p", "\"+p", { silent = true, desc = "Paste from clipboard" })
 
--- Sunround
--- Add
+-- SUNROUND: add
 keymap_set({ "v" }, "<leader>sb", "c[<C-R>\"]<ESC>", { silent = true, desc = "Sunround by brackets" })
 keymap_set({ "v" }, "<leader>sp", "c(<C-R>\")<ESC>", { silent = true, desc = "Sunround by parentheses" })
 keymap_set({ "v" }, "<leader>sk", "c{<C-R>\"}<esc>", { silent = true, desc = "Sunround by keys" })
 keymap_set({ "v" }, "<leader>sc", "c`<C-R>\"`<esc>", { silent = true, desc = "Sunround by crasis" })
 keymap_set({ "v" }, "<leader>sQ", "c'<C-R>\"'<esc>", { silent = true, desc = "Sunround by single quotes" })
 keymap_set({ "v" }, "<leader>sq", "c\"<C-R>\"\"<esc>", { silent = true, desc = "Sunround by quotes" })
--- Remove
+-- SUNROUND: remove
 keymap_set({ "n" }, "<leader>sb", "di[vhp", { silent = true, desc = "Remove brackets" })
 keymap_set({ "n" }, "<leader>sp", "di(vhp", { silent = true, desc = "Remove parentheses" })
 keymap_set({ "n" }, "<leader>sk", "di{vhp", { silent = true, desc = "Remove keys" })
 keymap_set({ "n" }, "<leader>sc", "di`vhp", { silent = true, desc = "Remove crasis" })
 keymap_set({ "n" }, "<leader>sQ", "di'vhp", { silent = true, desc = "Remove single quotes" })
 keymap_set({ "n" }, "<leader>sq", "di\"vhp", { silent = true, desc = "Remove quotes" })
--- Delete inside
+-- SUNROUND: delete inside
 keymap_set({ "n" }, "<leader>diq", "di\"", { silent = true, desc = "Delete inside quotes" })
 keymap_set({ "n" }, "<leader>diQ", "di'", { silent = true, desc = "Delete inside single quotes" })
 keymap_set({ "n" }, "<leader>dik", "di{", { silent = true, desc = "Delete inside keys" })
 keymap_set({ "n" }, "<leader>dib", "di[", { silent = true, desc = "Delete inside brackets" })
 keymap_set({ "n" }, "<leader>dip", "di(", { silent = true, desc = "Delete inside params" })
 keymap_set({ "n" }, "<leader>dic", "di`", { silent = true, desc = "Delete inside crasis" })
--- Delete including
+-- SUNROUND: delete including
 keymap_set({ "n" }, "<leader>daq", "da\"", { silent = true, desc = "Delete including quotes" })
 keymap_set({ "n" }, "<leader>daQ", "da'", { silent = true, desc = "Delete including single quotes" })
 keymap_set({ "n" }, "<leader>dak", "da{", { silent = true, desc = "Delete including keys" })
 keymap_set({ "n" }, "<leader>dab", "da[", { silent = true, desc = "Delete including brackets" })
 keymap_set({ "n" }, "<leader>dap", "da(", { silent = true, desc = "Delete including params" })
 keymap_set({ "n" }, "<leader>dac", "da`", { silent = true, desc = "Delete including crasis" })
--- Select inside
+-- SUNROUND: select inside
 keymap_set({ "n" }, "<leader>viq", "vi\"", { silent = true, desc = "Select inside quotes" })
 keymap_set({ "n" }, "<leader>viQ", "vi'", { silent = true, desc = "Select inside single quotes" })
 keymap_set({ "n" }, "<leader>vik", "vi{", { silent = true, desc = "Select inside keys" })
 keymap_set({ "n" }, "<leader>vib", "vi[", { silent = true, desc = "Select inside brackets" })
 keymap_set({ "n" }, "<leader>vip", "vi(", { silent = true, desc = "Select inside params" })
 keymap_set({ "n" }, "<leader>vic", "vi`", { silent = true, desc = "Select inside crasis" })
--- Select including
+-- SUNROUND: select including
 keymap_set({ "n" }, "<leader>vaq", "va\"", { silent = true, desc = "Select including quotes" })
 keymap_set({ "n" }, "<leader>vaQ", "va'", { silent = true, desc = "Select including single quotes" })
 keymap_set({ "n" }, "<leader>vak", "va{", { silent = true, desc = "Select including keys" })
@@ -75,12 +74,17 @@ keymap_set({ "n" }, "<leader>vab", "va[", { silent = true, desc = "Select includ
 keymap_set({ "n" }, "<leader>vap", "va(", { silent = true, desc = "Select including params" })
 keymap_set({ "n" }, "<leader>vac", "va`", { silent = true, desc = "Select including crasis" })
 
--- Files
+-- FILES
 keymap_set({ "n" }, "<leader>ww", "<cmd>w<CR>", { silent = true, desc = "Write buffer" })
 keymap_set({ "n" }, "<leader>wa", "<cmd>wa<CR>", { silent = true, desc = "Write all buffers" })
 keymap_set({ "n" }, "<leader>so", "<cmd>source %<cr>", { silent = true, desc = "Source current file" })
 
--- Restart
+-- PACK
+keymap_set({ "n" }, "<leader>pu", function()
+  vim.pack.update(nil, { force = true })
+end, { silent = true, desc = "Write buffer" })
+
+-- RESTART
 vim.keymap.set('n', '<leader>R', function()
   local session = vim.fn.stdpath('state') .. '/restart_session.vim'
   vim.cmd('mksession! ' .. vim.fn.fnameescape(session))

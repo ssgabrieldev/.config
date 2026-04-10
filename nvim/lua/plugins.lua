@@ -1,6 +1,11 @@
 local vim = vim
 local utils = require("utils")
 
+-- NVIM DEV ICONS: install
+vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons") }, { confirm = false })
+-- NVIM DEV ICONS: setup
+require("nvim-web-devicons").setup()
+
 -- TOKYONIGHT: install
 vim.pack.add({ utils.gh("folke/tokyonight.nvim") }, { confirm = false })
 -- TOKYONIGHT: setup
@@ -9,12 +14,12 @@ require("tokyonight").setup({})
 -- ONEDARK: install
 vim.pack.add({ utils.gh("navarasu/onedark.nvim") }, { confirm = false })
 -- ONEDARK: setup
-require('onedark').setup({ style = 'darker' })
+require("onedark").setup({ style = "darker" })
 
 -- KANAGAWA: install
 vim.pack.add({ utils.gh("rebelot/kanagawa.nvim") }, { confirm = false })
 -- KANAGAWA: setup
-require('kanagawa').setup({})
+require("kanagawa").setup({})
 
 -- KNOT: install
 vim.pack.add({
@@ -423,7 +428,7 @@ cmp.setup.cmdline(":", {
 vim.pack.add({ utils.gh("nvim-treesitter/nvim-treesitter") }, { confirm = false })
 -- TREE SITTER: setup
 require("nvim-treesitter").setup({
-  install_dir = vim.fn.stdpath('data') .. '/site',
+  install_dir = vim.fn.stdpath("data") .. "/site",
   highlight = {
     enable = true,
     use_languagetree = true,
@@ -443,8 +448,8 @@ require("lualine").setup({
   options = {
     theme = "auto",
     globalstatus = true,
-    component_separators = { left = '', right = '' },
-    section_separators = { left = '', right = '' },
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
   }
 })
 
@@ -652,7 +657,7 @@ end, {
   silent = true
 })
 vim.keymap.set({ "n", "t" }, "<leader>tf", function()
-  vim.cmd(vim.v.count + 1000 .. "ToggleTerm direction=horizontal")
+  vim.cmd(vim.v.count + 1000 .. "ToggleTerm direction=float")
 end, { desc = "Toggle float terminals", silent = true })
 
 -- MARKVIEW: install
