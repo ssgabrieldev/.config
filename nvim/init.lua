@@ -1,23 +1,7 @@
 local vim = vim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 vim.g.mapleader = ";"
 vim.g.border_style = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
-
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup("plugins")
 
 if vim.fn.executable("/usr/bin/fish") == 1 then
   vim.o.shell = "/usr/bin/fish"
@@ -70,3 +54,6 @@ vim.opt.foldlevel = 99
 vim.o.confirm = true
 
 require("keymaps")
+require("plugins")
+
+vim.cmd.colorscheme("knot")

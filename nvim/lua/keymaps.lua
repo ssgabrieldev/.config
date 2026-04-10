@@ -1,3 +1,4 @@
+local vim = vim
 local keymap_set = vim.keymap.set
 
 -- Terminal
@@ -78,3 +79,10 @@ keymap_set({ "n" }, "<leader>vac", "va`", { silent = true, desc = "Select includ
 keymap_set({ "n" }, "<leader>ww", "<cmd>w<CR>", { silent = true, desc = "Write buffer" })
 keymap_set({ "n" }, "<leader>wa", "<cmd>wa<CR>", { silent = true, desc = "Write all buffers" })
 keymap_set({ "n" }, "<leader>so", "<cmd>source %<cr>", { silent = true, desc = "Source current file" })
+
+-- Restart
+vim.keymap.set('n', '<leader>R', function()
+  local session = vim.fn.stdpath('state') .. '/restart_session.vim'
+  vim.cmd('mksession! ' .. vim.fn.fnameescape(session))
+  vim.cmd('restart source ' .. vim.fn.fnameescape(session))
+end, { desc = 'Restart Neovim' })
