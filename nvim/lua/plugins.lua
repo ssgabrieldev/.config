@@ -657,7 +657,7 @@ end, {
   silent = true
 })
 vim.keymap.set({ "n", "t" }, "<leader>tf", function()
-  vim.cmd(vim.v.count + 1000 .. "ToggleTerm direction=float")
+  vim.cmd(vim.v.count .. "ToggleTerm direction=float")
 end, { desc = "Toggle float terminals", silent = true })
 
 -- MARKVIEW: install
