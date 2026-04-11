@@ -80,7 +80,7 @@ keymap_set({ "n" }, "<leader>wa", "<cmd>wa<CR>", { silent = true, desc = "Write 
 keymap_set({ "n" }, "<leader>so", "<cmd>source %<cr>", { silent = true, desc = "Source current file" })
 
 -- PACK
-keymap_set({ "n" }, "<leader>pu", function()
+keymap_set({ "n" }, "<leader>PU", function()
   vim.pack.update(nil, { force = true })
 end, { silent = true, desc = "Write buffer" })
 

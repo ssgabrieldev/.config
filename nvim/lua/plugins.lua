@@ -1,35 +1,101 @@
 local vim = vim
 local utils = require("utils")
 
--- NVIM DEV ICONS: install
-vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons") }, { confirm = false })
+vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons"),
+  -- NVIM DEV ICONS: install
+  -- TOKYONIGHT: install
+  utils.gh("folke/tokyonight.nvim"),
+
+  -- ONEDARK: install
+  utils.gh("navarasu/onedark.nvim"),
+
+  -- KANAGAWA: install
+  utils.gh("rebelot/kanagawa.nvim"),
+
+  -- KNOT: install
+  utils.gh("rktjmp/lush.nvim"),
+  utils.gh("ssgabrieldev/knot.nvim"),
+
+  -- NVIM_TREE: install
+  utils.gh("nvim-tree/nvim-tree.lua"),
+
+  -- BUFFERLINE: install
+  utils.gh("akinsho/bufferline.nvim"),
+
+  -- TELESCOPE: install
+  utils.gh("nvim-telescope/telescope.nvim"),
+  utils.gh("nvim-lua/plenary.nvim"),
+  utils.gh("mfussenegger/nvim-dap"),
+  utils.gh("nvim-telescope/telescope-dap.nvim"),
+  utils.gh("nvim-telescope/telescope-ui-select.nvim"),
+  utils.gh("nvim-telescope/telescope-live-grep-args.nvim"),
+
+  -- IDENT_BLANK_LINES: install
+  utils.gh("lukas-reineke/indent-blankline.nvim"),
+
+  -- EDGY: install
+  utils.gh("folke/edgy.nvim"),
+
+  -- MASON: install
+  utils.gh("williamboman/mason.nvim"),
+  utils.gh("neovim/nvim-lspconfig"),
+  utils.gh("williamboman/mason-lspconfig.nvim"),
+
+  -- TREE_SITTER: install
+  utils.gh("nvim-treesitter/nvim-treesitter"),
+
+  -- LUA_LINE: install
+  utils.gh("nvim-lualine/lualine.nvim"),
+
+  -- NOTIFY: install
+  utils.gh("rcarriga/nvim-notify"),
+
+  -- DAP: install
+  utils.gh("mfussenegger/nvim-dap"),
+  utils.gh("igorlfs/nvim-dap-view"),
+  utils.gh("nvim-neotest/nvim-nio"),
+  utils.gh("nvim-telescope/telescope.nvim"),
+  utils.gh("nvim-telescope/telescope-dap.nvim"),
+  utils.gh("rcarriga/nvim-notify"),
+  utils.gh("nvim-tree/nvim-tree.lua"),
+
+  -- DAP_VIEW: install
+  utils.gh("igorlfs/nvim-dap-view"),
+
+  -- COPILOT: install
+  utils.gh("zbirenbaum/copilot.lua"),
+
+  -- CODE_COMPANION: install
+  utils.gh("nvim-lua/plenary.nvim"),
+  utils.gh("olimorris/codecompanion.nvim"),
+
+  -- TOGGLETERM: install
+  utils.gh("akinsho/toggleterm.nvim"),
+
+  -- MARKVIEW: install
+  utils.gh("OXY2DEV/markview.nvim"),
+
+  -- GIT_SIGNS: install
+  utils.gh("lewis6991/gitsigns.nvim"),
+
+  -- BLINK: install
+  utils.gh("rafamadriz/friendly-snippets"),
+  utils.gh("saghen/blink.cmp")
+}, { confirm = false })
+
 -- NVIM DEV ICONS: setup
 require("nvim-web-devicons").setup()
 
--- TOKYONIGHT: install
-vim.pack.add({ utils.gh("folke/tokyonight.nvim") }, { confirm = false })
 -- TOKYONIGHT: setup
 require("tokyonight").setup({})
 
--- ONEDARK: install
-vim.pack.add({ utils.gh("navarasu/onedark.nvim") }, { confirm = false })
 -- ONEDARK: setup
 require("onedark").setup({ style = "darker" })
 
--- KANAGAWA: install
-vim.pack.add({ utils.gh("rebelot/kanagawa.nvim") }, { confirm = false })
 -- KANAGAWA: setup
 require("kanagawa").setup({})
 
--- KNOT: install
-vim.pack.add({
-  utils.gh("rktjmp/lush.nvim"),
-  utils.gh("ssgabrieldev/knot.nvim")
-}, { confirm = false })
-
--- NVIM TREE: install
-vim.pack.add({ utils.gh("nvim-tree/nvim-tree.lua") }, { confirm = false })
--- NVIM TREE: setup
+-- NVIM_TREE: setup
 require("nvim-tree").setup({
   renderer = {
     indent_markers = {
@@ -47,13 +113,11 @@ require("nvim-tree").setup({
   },
   update_focused_file = { enable = true }
 })
--- NVIM TREE: keys
+-- NVIM_TREE: keys
 vim.keymap.set("n", "<leader>ee", function()
   require("nvim-tree.api").tree.toggle()
 end, { desc = "Toggle NvimTree", silent = true })
 
--- BUFFERLINE: install
-vim.pack.add({ utils.gh("akinsho/bufferline.nvim") }, { confirm = false })
 -- BUFFERLINE: setup
 require("bufferline").setup({
   options = {
@@ -87,15 +151,6 @@ vim.keymap.set("n", "<leader>bL", "<Cmd>BufferLineCloseRight<CR>",
 vim.keymap.set("n", "<leader>bO", "<Cmd>BufferLineCloseOthers<CR>",
   { desc = "Close all other buffers", noremap = true, silent = true })
 
--- TELESCOPE: install
-vim.pack.add({
-  utils.gh("nvim-telescope/telescope.nvim"),
-  utils.gh("nvim-lua/plenary.nvim"),
-  utils.gh("mfussenegger/nvim-dap"),
-  utils.gh("nvim-telescope/telescope-dap.nvim"),
-  utils.gh("nvim-telescope/telescope-ui-select.nvim"),
-  utils.gh("nvim-telescope/telescope-live-grep-args.nvim"),
-}, { confirm = false })
 -- TELESCOPE: setup
 require("telescope").load_extension("ui-select")
 require("telescope").load_extension("live_grep_args")
@@ -127,37 +182,32 @@ require("telescope").setup({
   }
 })
 -- TELESCOPE: keys
-local builtin = require("telescope.builtin")
 vim.keymap.set({ "n", "t" }, "<leader>ff", function()
-  builtin.find_files({ hidden = true, no_ignore = true, })
+  require("telescope.builtin").find_files({ hidden = true, no_ignore = true, })
 end, { desc = "Find file" })
 vim.keymap.set({ "n", "t" }, "<leader>fg", function()
-  builtin.git_status()
+  require("telescope.builtin").git_status()
 end, { desc = "Git status" })
 vim.keymap.set({ "n", "t" }, "<leader>fw", function()
   require("telescope").extensions.live_grep_args.live_grep_args()
 end, { desc = "Find pattern with args" })
 vim.keymap.set({ "n", "t" }, "<leader>fb", function()
-  builtin.buffers()
+  require("telescope.builtin").buffers()
 end, { desc = "Find buffer" })
 vim.keymap.set({ "n", "t" }, "<leader>fr", function()
-  builtin.resume()
+  require("telescope.builtin").resume()
 end, { desc = "Resume last picker" })
 vim.keymap.set({ "n", "t" }, "<leader>fc", function()
-  builtin.find_files({ hidden = true, no_ignore = true, cwd = "~/.config/nvim" })
+  require("telescope.builtin").find_files({ hidden = true, no_ignore = true, cwd = "~/.config/nvim" })
 end, { desc = "Find config files", silent = true })
 
--- IDENT BLANK LINES: install
-vim.pack.add({ utils.gh("lukas-reineke/indent-blankline.nvim") }, { confirm = false })
--- IDENT BLANK LINES: setup
+-- IDENT_BLANK_LINES: setup
 require("ibl").setup({
   indent = {
     char = "|"
   }
 })
 
--- EDGY: install
-vim.pack.add({ utils.gh("folke/edgy.nvim") }, { confirm = false })
 -- EDGY: setup
 require("edgy").setup({
   animate = { enabled = false },
@@ -265,12 +315,6 @@ require("edgy").setup({
   }
 })
 
--- MASON: install
-vim.pack.add({
-  utils.gh("williamboman/mason.nvim"),
-  utils.gh("neovim/nvim-lspconfig"),
-  utils.gh("williamboman/mason-lspconfig.nvim")
-}, { confirm = false })
 -- MASON: setup
 require("mason").setup({ ui = { border = vim.g.border_style } })
 require("mason-lspconfig").setup({
@@ -335,98 +379,7 @@ end, opts)
 
 vim.lsp.config("*", lsp_config)
 
--- CMP: install
-vim.pack.add({
-  utils.gh("hrsh7th/nvim-cmp"),
-  utils.gh("neovim/nvim-lspconfig"),
-  utils.gh("hrsh7th/cmp-nvim-lsp"),
-  utils.gh("hrsh7th/cmp-path"),
-  utils.gh("L3MON4D3/LuaSnip"),
-  utils.gh("saadparwaiz1/cmp_luasnip"),
-  utils.gh("onsails/lspkind.nvim"),
-  utils.gh("hrsh7th/cmp-buffer"),
-  utils.gh("hrsh7th/cmp-cmdline"),
-}, { confirm = false })
--- CMP: setup
-local cmp = require("cmp")
-local lspkind = require("lspkind")
-local border = vim.g.border_style
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      require("luasnip").lsp_expand(args.body)
-    end,
-  },
-  window = {
-    completion = cmp.config.window.bordered({
-      border = border,
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None"
-    }),
-    documentation = cmp.config.window.bordered({
-      border = border,
-      winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,Search:None"
-    }),
-  },
-  mapping = cmp.mapping.preset.insert({
-    ["<c-e>"] = cmp.mapping.abort(),
-    ["<c-u>"] = cmp.mapping.scroll_docs(-4),
-    ["<c-d>"] = cmp.mapping.scroll_docs(4),
-    ["<c-Space>"] = cmp.mapping.complete(),
-    ["<cr>"] = cmp.mapping.confirm({ select = true }),
-    ["<tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end,
-    ["<s-tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end,
-  }),
-  formatting = {
-    format = lspkind.cmp_format(),
-  },
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "path" },
-    { name = "codecompanion" }
-  }, {
-    { name = "buffer" },
-  }),
-  experimental = {
-    ghost_text = {
-      hl_group = "Comment",
-    }
-  }
-})
-
-cmp.setup.cmdline({ "/", "?" }, {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" }
-  }
-})
-
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "path" }
-  }, {
-    { name = "cmdline" }
-  }),
-  matching = { disallow_symbol_nonprefix_matching = false }
-})
-
--- TREE SITTER: install
-vim.pack.add({ utils.gh("nvim-treesitter/nvim-treesitter") }, { confirm = false })
--- TREE SITTER: setup
+-- TREE_SITTER: setup
 require("nvim-treesitter").setup({
   install_dir = vim.fn.stdpath("data") .. "/site",
   highlight = {
@@ -441,9 +394,7 @@ require("nvim-treesitter").setup({
   }
 })
 
--- LUA LINE: install
-vim.pack.add({ utils.gh("nvim-lualine/lualine.nvim") }, { confirm = false })
--- LUA LINE: setup
+-- LUA_LINE: setup
 require("lualine").setup({
   options = {
     theme = "auto",
@@ -453,8 +404,6 @@ require("lualine").setup({
   }
 })
 
--- NOTIFY: install
-vim.pack.add({ utils.gh("rcarriga/nvim-notify") }, { confirm = false })
 -- NOTIFY: setup
 require("notify").setup({
   -- background_colour = "#000000",
@@ -478,25 +427,14 @@ vim.keymap.set("n", "<leader>nc", function()
   require("notify").dismiss()
 end, { desc = "Close notifications", silent = true })
 
--- DAP: install
-vim.pack.add({
-  utils.gh("mfussenegger/nvim-dap"),
-  utils.gh("igorlfs/nvim-dap-view"),
-  utils.gh("nvim-neotest/nvim-nio"),
-  utils.gh("nvim-telescope/telescope.nvim"),
-  utils.gh("nvim-telescope/telescope-dap.nvim"),
-  utils.gh("rcarriga/nvim-notify"),
-  utils.gh("nvim-tree/nvim-tree.lua"),
-}, { confirm = false })
 -- DAP: setup
-local dap = require("dap")
 local js_debugger = { "pwa-chrome", "pwa-node" }
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" })
 
 for _, debugger in ipairs(js_debugger) do
-  dap.adapters[debugger] = function(cb)
+  require("dap").adapters[debugger] = function(cb)
     local adap = {
       type = "server",
       host = "localhost",
@@ -512,7 +450,7 @@ for _, debugger in ipairs(js_debugger) do
   end
 end
 
-dap.adapters.firefox = function(cb, config)
+require("dap").adapters.firefox = function(cb, config)
   if config.preLaunchTask then
     vim.fn.system(config.preLaunchTask)
   end
@@ -523,36 +461,34 @@ dap.adapters.firefox = function(cb, config)
   })
 end
 
-dap.listeners.before.attach.dapui_config = function()
+require("dap").listeners.before.attach.dapui_config = function()
   vim.notify("Debugger attatched", "info")
 end
-dap.listeners.before.launch.dapui_config = function()
+require("dap").listeners.before.launch.dapui_config = function()
   vim.notify("Debugger launched", "info")
 end
-dap.listeners.before.event_exited.dapui_config = function()
+require("dap").listeners.before.event_exited.dapui_config = function()
   vim.notify("Debugger exited", "info")
 end
 
 vim.keymap.set("n", "<leader>db", function()
-  dap.toggle_breakpoint()
+  require("dap").toggle_breakpoint()
 end, { desc = "Debugger toggle breakpoint" })
 vim.keymap.set("n", "<leader>de", function()
-  dap.terminate({
+  require("dap").terminate({
     on_done = function()
       vim.notify("Debugger terminated", "info")
     end
   })
 end, { desc = "Debugger terminate" })
 vim.keymap.set("n", "<leader>dr", function()
-  dap.continue()
+  require("dap").continue()
 end, { desc = "Debugger continue" })
 vim.keymap.set({ "n", "v" }, "<leader>dh", function()
   require("dap.ui.widgets").hover(nil, { border = vim.g.border_style })
 end, { desc = "Debugger add expression" })
 
--- DAP VIEW: install
-vim.pack.add({ utils.gh("igorlfs/nvim-dap-view"), }, { confirm = false })
--- DAP VIEW: setup
+-- DAP_VIEW: setup
 require("dap-view").setup({
   winbar = {
     sections = {
@@ -580,31 +516,41 @@ require("dap-view").setup({
     },
   }
 })
--- DAP VIEW: keys
+-- DAP_VIEW: keys
 vim.keymap.set("n", "<leader>db", function()
-  dap.toggle_breakpoint()
+  require("dap").toggle_breakpoint()
 end, { desc = "DAP: Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>de", function()
-  dap.terminate({}, {}, {
+  require("dap").terminate({}, {}, {
     on_done = function()
       vim.notify("Debugger terminated", "info")
     end,
   })
 end, { desc = "DAP: Terminate" })
 vim.keymap.set("n", "<leader>dr", function()
-  dap.continue()
+  require("dap").continue()
 end, { desc = "DAP: Continue/Start" })
 vim.keymap.set({ "n", "v" }, "<leader>dh", function()
   require("dap.ui.widgets").hover(nil, { border = vim.g.border_style or "rounded" })
 end, { desc = "DAP: Hover Expression" })
 
--- CODE COMPANION: install
-vim.pack.add({
-  utils.gh("github/copilot.vim"),
-  utils.gh("nvim-lua/plenary.nvim"),
-  utils.gh("olimorris/codecompanion.nvim")
-}, { confirm = false })
--- CODE COMPANION: setup
+-- COPILOT: setup
+require("copilot").setup({
+  suggestion = {
+    auto_trigger = false,
+    enabled = true,
+    -- COPILOT: keys
+    keymap = {
+      accept = "<leader>ca",
+      next = "<leader>cn",
+      prev = "<leader>cp",
+      dismiss = "<leader>cd"
+    }
+  },
+  panel = { enabled = false },
+})
+
+-- CODE_COMPANION: setup
 require("codecompanion").setup({
   strategies = {
     chat = {
@@ -618,14 +564,12 @@ require("codecompanion").setup({
     }
   }
 })
--- CODE COMPANION: keys
+-- CODE_COMPANION: keys
 vim.keymap.set("n", "<leader>cc", "<cmd>CodeCompanionActions<cr>", {
   desc = "Code Companion Actions",
   silent = true
 })
 
--- TOGGLETERM: install
-vim.pack.add({ utils.gh("akinsho/toggleterm.nvim") }, { confirm = false })
 -- TOGGLETERM: setup
 require("toggleterm").setup({
   persist_size = false,
@@ -660,8 +604,6 @@ vim.keymap.set({ "n", "t" }, "<leader>tf", function()
   vim.cmd(vim.v.count .. "ToggleTerm direction=float")
 end, { desc = "Toggle float terminals", silent = true })
 
--- MARKVIEW: install
-vim.pack.add({ utils.gh("OXY2DEV/markview.nvim") }, { confirm = false })
 -- MARKVIEW: setup
 require("markview").setup({
   preview = {
@@ -701,13 +643,11 @@ vim.keymap.set("n", "<leader>mt", "<cmd>Markview toggle<cr>", {
   desc = "Toggle Markview Preview"
 })
 
--- GIT SIGNS: install
-vim.pack.add({ utils.gh("lewis6991/gitsigns.nvim") })
--- GIT SIGNS: setup
+-- GIT_SIGNS: setup
 require("gitsigns").setup({
   current_line_blame = true,
 })
--- GIT SIGNS: keys
+-- GIT_SIGNS: keys
 vim.keymap.set("n", "<leader>gt", function()
   vim.cmd("Gitsigns toggle_linehl")
   vim.cmd("Gitsigns toggle_deleted")
@@ -715,3 +655,32 @@ end, { desc = "Toggle Line Git Diff", silent = true })
 vim.keymap.set("n", "<leader>gd", function()
   vim.cmd("Gitsigns diffthis")
 end, { desc = "Toggle Git Diff", silent = true })
+
+-- BLINK: setup
+require("blink.cmp").setup({
+  cmdline = { enabled = true },
+  completion = {
+    menu = {
+      border = vim.g.border_style
+    },
+    documentation = {
+      auto_show = true,
+      window = {
+        border = vim.g.border_style
+      }
+    },
+    ghost_text = { enabled = true }
+  },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer" },
+  },
+  -- BLINK: keys
+  keymap = {
+    ["<s-tab>"] = { "select_prev", "fallback" },
+    ["<tab>"] = { "select_next", "fallback" },
+    ["<cr>"] = { "accept", "fallback" },
+    ["<c-u>"] = { "scroll_documentation_up", "fallback" },
+    ["<c-d>"] = { "scroll_documentation_down", "fallback" }
+  }
+})
+
