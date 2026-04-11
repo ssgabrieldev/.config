@@ -658,7 +658,13 @@ end, { desc = "Toggle Git Diff", silent = true })
 
 -- BLINK: setup
 require("blink.cmp").setup({
-  cmdline = { enabled = true },
+  fuzzy = { implementation = "lua" },
+  cmdline = {
+    enabled = true,
+    keymap = { preset = 'cmdline' },
+    sources = { 'buffer', 'cmdline' },
+    completion = { menu = { auto_show = true } }
+  },
   completion = {
     menu = {
       border = vim.g.border_style
@@ -683,4 +689,3 @@ require("blink.cmp").setup({
     ["<c-d>"] = { "scroll_documentation_down", "fallback" }
   }
 })
-
