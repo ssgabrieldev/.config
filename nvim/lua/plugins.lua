@@ -1,8 +1,7 @@
 local vim = vim
 local utils = require("utils")
 
-vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons"),
-  -- NVIM DEV ICONS: install
+vim.pack.add({
   -- TOKYONIGHT: install
   utils.gh("folke/tokyonight.nvim"),
 
@@ -17,6 +16,8 @@ vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons"),
   utils.gh("ssgabrieldev/knot.nvim"),
 
   -- NVIM_TREE: install
+  utils.gh("nvim-tree/nvim-web-devicons"),
+
   utils.gh("nvim-tree/nvim-tree.lua"),
 
   -- BUFFERLINE: install
@@ -82,9 +83,6 @@ vim.pack.add({ utils.gh("nvim-tree/nvim-web-devicons"),
   utils.gh("rafamadriz/friendly-snippets"),
   utils.gh("saghen/blink.cmp")
 }, { confirm = false })
-
--- NVIM DEV ICONS: setup
-require("nvim-web-devicons").setup()
 
 -- TOKYONIGHT: setup
 require("tokyonight").setup({})
@@ -214,7 +212,7 @@ require("edgy").setup({
   left = {
     {
       ft = "NvimTree",
-      wo = { winfixbuf = true, winbar = false }
+      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
     }
   },
   bottom = {
@@ -317,17 +315,8 @@ require("edgy").setup({
 
 -- MASON: setup
 require("mason").setup({ ui = { border = vim.g.border_style } })
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "lua_ls",
-    "ts_ls",
-    "emmet_ls",
-    "cssls"
-  },
-  automatic_enable = true
-})
+require("mason-lspconfig").setup({ automatic_enable = true })
 
-local border = vim.g.border_style or "rounded"
 local signs = {
   Error = "",
   Warn  = "",
@@ -341,17 +330,13 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config({
-  float = { border = border },
+  float = { border = vim.g.border_style },
   signs = true,
   virtual_text = {
     prefix = " ",
     spacing = 1,
   }
 })
-
-require("lspconfig.ui.windows").default_options = {
-  border = border
-}
 
 local opts = { noremap = true, silent = true }
 local lsp_config = { capabilities = vim.lsp.protocol.make_client_capabilities(), }
@@ -364,14 +349,14 @@ vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 end, opts)
 vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.buf.hover({
-    border = border,
+    border = vim.g.border_style,
     max_width = 100,
     max_height = 35
   })
 end, opts)
 vim.keymap.set("n", "<leader>le", function()
   vim.diagnostic.open_float({
-    border = border,
+    border = vim.g.border_style,
     max_width = 100,
     max_height = 35
   })
