@@ -183,8 +183,11 @@ require("telescope").setup({
 vim.keymap.set({ "n", "t" }, "<leader>ff", function()
   require("telescope.builtin").find_files({ hidden = true, no_ignore = true, })
 end, { desc = "Find file" })
-vim.keymap.set({ "n", "t" }, "<leader>fg", function()
+vim.keymap.set({ "n", "t" }, "<leader>fgs", function()
   require("telescope.builtin").git_status()
+end, { desc = "Git status" })
+vim.keymap.set({ "n", "t" }, "<leader>fgb", function()
+  require("telescope.builtin").git_branches()
 end, { desc = "Git status" })
 vim.keymap.set({ "n", "t" }, "<leader>fw", function()
   require("telescope").extensions.live_grep_args.live_grep_args()
@@ -324,23 +327,28 @@ local signs = {
   Info  = "󰋽",
 }
 
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 vim.diagnostic.config({
   float = { border = vim.g.border_style },
-  signs = true,
   virtual_text = {
     prefix = " ",
     spacing = 1,
-  }
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.Error,
+      [vim.diagnostic.severity.WARN] = signs.Warn,
+      [vim.diagnostic.severity.HINT] = signs.Hint,
+      [vim.diagnostic.severity.INFO] = signs.Info,
+    },
+  },
 })
 
 local opts = { noremap = true, silent = true }
-local lsp_config = { capabilities = vim.lsp.protocol.make_client_capabilities(), }
+local lsp_config = { capabilities = vim.lsp.protocol.make_client_capabilities() }
 
+vim.lsp.config("*", lsp_config)
+
+-- MASON: keymaps
 vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, opts)
 vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
 vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
@@ -361,8 +369,6 @@ vim.keymap.set("n", "<leader>le", function()
     max_height = 35
   })
 end, opts)
-
-vim.lsp.config("*", lsp_config)
 
 -- TREE_SITTER: setup
 require("nvim-treesitter").setup({
@@ -502,6 +508,9 @@ require("dap-view").setup({
   }
 })
 -- DAP_VIEW: keys
+vim.keymap.set("n", "<leader>du", function()
+  require("dap").toggle_breakpoint()
+end, { desc = "DAP: Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>db", function()
   require("dap").toggle_breakpoint()
 end, { desc = "DAP: Toggle Breakpoint" })
@@ -518,6 +527,12 @@ end, { desc = "DAP: Continue/Start" })
 vim.keymap.set({ "n", "v" }, "<leader>dh", function()
   require("dap.ui.widgets").hover(nil, { border = vim.g.border_style or "rounded" })
 end, { desc = "DAP: Hover Expression" })
+vim.keymap.set({ "n" }, "<leader>du", function()
+  require("dap-view").toggle()
+end, { desc = "Debugger toggle ui" })
+vim.keymap.set({ "n" }, "<leader>dw", function()
+  require("dap-view").add_expr()
+end, { desc = "Debugger add expression" })
 
 -- COPILOT: setup
 require("copilot").setup({
