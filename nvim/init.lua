@@ -55,5 +55,4 @@ vim.o.confirm = true
 
 require("keymaps")
 require("plugins")
-
-vim.cmd.colorscheme("knot")
+require("theme")
