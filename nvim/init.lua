@@ -53,6 +53,6 @@ vim.opt.foldlevel = 99
 
 vim.o.confirm = true
 
+require("theme").setup()
 require("keymaps")
 require("plugins")
-require("theme")

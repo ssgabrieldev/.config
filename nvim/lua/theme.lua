@@ -1,199 +1,259 @@
 local vim = vim
 
-vim.g.colors_name = "knot"
-
-local colors = {
-  black_00  = "#000000",
-  black_01  = "#1B1B1B",
-  black_02  = "#262626",
-  red_00    = "#660708",
-  red_01    = "#a4161a",
-  red_02    = "#ba181b",
-  gray_00   = "#495057",
-  gray_01   = "#6c757d",
-  gray_02   = "#adb5bd",
-  yellow_00 = "#c36f09",
-  yellow_01 = "#eeba0b",
-  yellow_02 = "#f4e409",
-  blue_00   = "#023e8a",
-  blue_01   = "#0077b6",
-  blue_02   = "#0096c7",
-  green_00  = "#006400",
-  green_01  = "#007200",
-  green_02  = "#008000"
+local M = {
+  colors = {
+    black_00  = "#000000",
+    black_01  = "#0f0f0f",
+    black_02  = "#262626",
+    red_00    = "#660708",
+    red_01    = "#a4161a",
+    red_02    = "#ba181b",
+    gray_00   = "#495057",
+    gray_01   = "#6c757d",
+    gray_02   = "#adb5bd",
+    yellow_00 = "#c36f09",
+    yellow_01 = "#eeba0b",
+    yellow_02 = "#f4e409",
+    blue_00   = "#023e8a",
+    blue_01   = "#0077b6",
+    blue_02   = "#0096c7",
+    green_00  = "#006400",
+    green_01  = "#007200",
+    green_02  = "#008000"
+  }
 }
 
-local patterns = {}
-patterns.normal = { bg = colors.black_00, fg = colors.gray_01 }
-patterns.float_normal = { bg = colors.black_01, fg = colors.gray_02 }
-patterns.float_border = vim.tbl_extend('force', patterns.float_normal, { fg = patterns.normal.bg })
-patterns.ok = { bg = colors.green_00, fg = colors.green_02 }
-patterns.error = { bg = colors.red_00, fg = colors.red_02 }
-patterns.warning = { bg = colors.yellow_00, fg = colors.yellow_02 }
-patterns.info = { bg = colors.blue_00, fg = colors.blue_02 }
-
-vim.cmd("highlight clear")
-
-if vim.fn.exists("syntax_on") then
-  vim.cmd("syntax reset")
-end
+M.patterns = {}
+M.patterns.normal = { bg = M.colors.black_00, fg = M.colors.gray_01 }
+M.patterns.alt_normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
+M.patterns.alt_border = { bg = M.patterns.alt_normal.bg, fg = M.patterns.normal.bg }
+M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01 }
+M.patterns.window_status_inactive = { bg = M.colors.black_01, fg = M.colors.gray_00 }
+M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
+M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
+M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
+M.patterns.info = { bg = M.colors.blue_00, fg = M.colors.blue_02 }
 
 local hl = function(group, opts)
   vim.api.nvim_set_hl(0, group, opts)
 end
 
--- NEOVIM BASE
-hl("Normal", patterns.normal)
-hl("Comment", vim.tbl_extend('force', patterns.normal, { fg = colors.gray_00 }))
-hl("Delimiter", { fg = colors.gray_02 })
-hl("Keyword", { fg = colors.red_02 })
--- hl("StatusLine", { bg = colors.black_02, fg = colors.gray_03 })
-hl("DiagnosticInfo", vim.tbl_extend('force', patterns.info, { bg = 'NONE' }))
-hl("DiagnosticWarn", vim.tbl_extend('force', patterns.warning, { bg = 'NONE' }))
-hl("DiagnosticError", vim.tbl_extend('force', patterns.error, { bg = 'NONE' }))
-hl("DiagnosticHint", vim.tbl_extend('force', patterns.info, { bg = 'NONE' }))
-hl("Added", vim.tbl_extend('force', patterns.ok, { bg = 'NONE' }))
-hl("Removed", vim.tbl_extend('force', patterns.error, { bg = 'NONE' }))
-hl("Changed", vim.tbl_extend('force', patterns.info, { bg = 'NONE' }))
-hl("Search", vim.tbl_extend('force', patterns.warning, { bg = 'NONE' }))
+M.setup = function()
+  vim.g.colors_name = "knot"
+  vim.cmd("highlight clear")
 
--- WINDOW CONTENT
-hl("Visual", { link = "CursorLine" })
-hl("CursorLine", { bg = colors.black_01 })
-hl("CursorLineNr", { link = "Keyword" })
--- hl("EndOfBuffer", { fg = colors.black_00, bg = colors.black_00 })
--- hl("Directory", { link = "Normal" })
-hl("NormalFloat", patterns.float_normal)
+  if vim.fn.exists("syntax_on") then
+    vim.cmd("syntax reset")
+  end
 
--- SYNTAX
-hl("String", { link = "Keyword" })
-hl("Function", { link = "Keyword" })
-hl("Statement", { link = "Keyword" })
-hl("Special", { link = "Delimiter" })
-hl("Type", { link = "Keyword" })
-hl("Identifier", { link = "Delimiter" })
-hl("Number", { link = "Delimiter" })
-hl("Boolean", { link = "Delimiter" })
+  -- NEOVIM BASE
+  hl("Normal", M.patterns.normal)
+  hl("Comment", vim.tbl_extend('force', M.patterns.normal, { fg = M.colors.gray_00 }))
+  hl("StatusLine", M.patterns.window_status_active)
+  hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
+  hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
+  hl("DiagnosticError", vim.tbl_extend('force', M.patterns.error, { bg = 'NONE' }))
+  hl("DiagnosticHint", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
+  hl("Added", vim.tbl_extend('force', M.patterns.ok, { bg = 'NONE' }))
+  hl("Removed", vim.tbl_extend('force', M.patterns.error, { bg = 'NONE' }))
+  hl("Changed", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
+  hl("Search", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
+  hl("Delimiter", { fg = M.colors.gray_02 })
+  hl("Keyword", { fg = M.colors.red_02 })
 
--- DIFF AND GIT
-hl("DiffAdd", { link = "Added" })
-hl("DiffDelete", { link = "Removed" })
-hl("DiffChange", { link = "Changed" })
-hl("GitSignsAdd", { link = "Added" })
-hl("GitSignsDelete", { link = "Removed" })
-hl("GitSignsChange", { link = "Changed" })
+  -- WINDOW CONTENT
+  hl("CursorLine", { bg = M.colors.black_01 })
+  hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
+  hl("NormalFloat", M.patterns.alt_normal)
+  hl("Visual", { link = "CursorLine" })
+  hl("CursorLineNr", { link = "Keyword" })
+  hl("Directory", { link = "Normal" })
 
--- Sinais de Diagnóstico
--- hl("DiagnosticSignInfo", { link = "DiagnosticInfo" })
--- hl("DiagnosticSignWarn", { link = "DiagnosticWarn" })
--- hl("DiagnosticSignError", { link = "DiagnosticError" })
--- hl("DiagnosticSignHint", { link = "DiagnosticHint" })
+  -- SYNTAX
+  hl("String", { link = "Keyword" })
+  hl("Function", { link = "Keyword" })
+  hl("Statement", { link = "Keyword" })
+  hl("Special", { link = "Delimiter" })
+  hl("Type", { link = "Keyword" })
+  hl("Identifier", { link = "Delimiter" })
+  hl("Number", { link = "Delimiter" })
+  hl("Boolean", { link = "Delimiter" })
 
--- Texto Virtual de Diagnóstico
-hl("DiagnosticVirtualTextInfo", patterns.info)
-hl("DiagnosticVirtualTextWarn", patterns.warning)
-hl("DiagnosticVirtualTextError", patterns.error)
-hl("DiagnosticVirtualTextHint", patterns.info)
+  -- DIFF AND GIT
+  hl("DiffAdd", { link = "Added" })
+  hl("DiffDelete", { link = "Removed" })
+  hl("DiffChange", { link = "Changed" })
+  hl("GitSignsAdd", { link = "Added" })
+  hl("GitSignsDelete", { link = "Removed" })
+  hl("GitSignsChange", { link = "Changed" })
 
--- DIAGNOSTICS
--- hl("DiagnosticUnderlineInfo", { sp = colors.blue_02, undercurl = true })
--- hl("DiagnosticUnderlineWarn", { sp = colors.yellow_02, undercurl = true })
--- hl("DiagnosticUnderlineError", { sp = colors.red_02, undercurl = true })
--- hl("DiagnosticUnderlineHint", { sp = colors.blue_02, undercurl = true })
--- hl("ErrorMsg", { link = "DiagnosticError" })
--- hl("WarningMsg", { link = "DiagnosticWarn" })
-hl("htmlTagName", { link = "Delimiter" })
-hl("typescriptParens", { link = "Delimiter" })
+  -- Sinais de Diagnóstico
+  hl("DiagnosticSignInfo", { link = "DiagnosticInfo" })
+  hl("DiagnosticSignWarn", { link = "DiagnosticWarn" })
+  hl("DiagnosticSignError", { link = "DiagnosticError" })
+  hl("DiagnosticSignHint", { link = "DiagnosticHint" })
 
--- TREESITTER
-hl("@keyword", { link = "Keyword" })
-hl("@string", { link = "Keyword" })
-hl("@variable.parameter", { link = "Delimiter" })
-hl("@function", { link = "Keyword" })
-hl("@function.method", { link = "Keyword" })
-hl("@function.builtin", { link = "Keyword" })
-hl("@method", { link = "Keyword" })
--- hl("@variable", { fg = colors.gray_03 })
-hl("@number", { link = "Delimiter" })
-hl("@boolean", { link = "Delimiter" })
--- hl("@lsp.type.property", { fg = colors.gray_03 })
-hl("@markup.raw.block.markdown", { bold = true })
+  -- Texto Virtual de Diagnóstico
+  hl("DiagnosticVirtualTextInfo", M.patterns.info)
+  hl("DiagnosticVirtualTextWarn", M.patterns.warning)
+  hl("DiagnosticVirtualTextError", M.patterns.error)
+  hl("DiagnosticVirtualTextHint", M.patterns.info)
 
--- WINDOW DECORATION
--- hl("StatusLineNC", { fg = "#555555", bg = colors.black_02 }) -- gray_li16.da(50)
--- hl("WinSeparator", { bg = colors.black_00, fg = colors.black_02 })
-hl("FloatBorder", patterns.float_border)
--- hl("WinBar", { bg = colors.black_03 })
--- hl("WinBarNC", { link = "WinBar" })
--- hl("WinBarActive", { bg = colors.black_03 })
--- hl("WinBarInactive", { bg = colors.black_02 })
+  -- DIAGNOSTICS
+  hl("DiagnosticUnderlineInfo", { sp = M.patterns.info.fg, undercurl = true })
+  hl("DiagnosticUnderlineWarn", { sp = M.patterns.warning.fg, undercurl = true })
+  hl("DiagnosticUnderlineError", { sp = M.patterns.error.fg, undercurl = true })
+  hl("DiagnosticUnderlineHint", { sp = M.patterns.info.fg, undercurl = true })
+  hl("ErrorMsg", { link = "DiagnosticError" })
+  hl("WarningMsg", { link = "DiagnosticWarn" })
+  hl("htmlTagName", { link = "Delimiter" })
+  hl("typescriptParens", { link = "Delimiter" })
 
--- TELESCOPE
-hl("TelescopeNormal", { link = "NormalFloat" })
-hl("TelescopeBorder", { link = "FloatBorder" })
-hl("TelescopeTitle", { bg = colors.red_01, fg = colors.black_00 })
+  -- TREESITTER
+  hl("@variable", { fg = M.colors.gray_02 })
+  hl("@keyword", { link = "Keyword" })
+  hl("@string", { link = "Keyword" })
+  hl("@variable.parameter", { link = "Delimiter" })
+  hl("@function", { link = "Keyword" })
+  hl("@function.method", { link = "Keyword" })
+  hl("@function.builtin", { link = "Keyword" })
+  hl("@method", { link = "Keyword" })
+  hl("@number", { link = "Delimiter" })
+  hl("@boolean", { link = "Delimiter" })
+  hl("@lsp.type.property", { fg = M.colors.gray_02 })
+  hl("@markup.raw.block.markdown", { bold = true })
 
--- NVIMTREE
--- hl("NvimTreeNormal", { bg = colors.black_00, fg = colors.gray_03 })
--- hl("NvimTreeEndOfBuffer", { fg = colors.black_00, bg = colors.black_00 })
--- hl("NvimTreeCursorLine", { bg = colors.black_00 })
+  -- WINDOW DECORATION
+  hl("StatusLineNC", M.patterns.window_status_inactive)
+  hl("FloatBorder", M.patterns.alt_border)
+  hl("WinSeparator", { bg = M.patterns.normal.bg, fg = M.patterns.window_status_active.bg })
+  hl("WinBarActive", M.patterns.window_status_active)
+  hl("WinBarInactive", M.patterns.window_status_inactive)
+  hl("WinBar", { link = "WinBarActive" })
+  hl("WinBarNC", { link = "WinBarInactive" })
 
--- BUFFERLINE: BASE & INACTIVE
--- hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
--- hl("BufferLineBackground", { bg = colors.black_02 })
--- hl("BufferLineDuplicate", { link = "BufferLineBackground" })
--- hl("BufferLineFill", { link = "BufferLineBackground" })
--- hl("BufferLineModified", { link = "BufferLineBackground" })
--- hl("BufferLineCloseButton", { link = "BufferLineBackground" })
--- hl("BufferLinePick", { bg = colors.black_02, fg = colors.red_01 })
--- hl("BufferLineHint", { fg = colors.blue_01, bg = colors.black_02 })
--- hl("BufferLineError", { fg = colors.red_01, bg = colors.black_02 })
--- hl("BufferLineWarning", { fg = colors.yellow_01, bg = colors.black_02 })
--- hl("BufferLineInfo", { fg = colors.blue_01, bg = colors.black_02 })
--- hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
--- hl("BufferLineDevIconDefaultInactive", { link = "BufferLineBufferSelected" })
+  -- TELESCOPE
+  hl("TelescopeNormal", { link = "NormalFloat" })
+  hl("TelescopeBorder", { link = "FloatBorder" })
+  hl("TelescopeTitle", { bg = M.colors.red_01, fg = M.colors.black_00 })
 
--- BUFFERLINE: VISIBLE
--- hl("BufferLineBufferVisible", { bg = visible_bg, fg = colors.gray_01 })
--- hl("BufferLineDuplicateVisible", { link = "BufferLineBufferVisible" })
--- hl("BufferLineIndicatorVisible", { link = "BufferLineBufferVisible" })
--- hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
--- hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
--- hl("BufferLineDevIconDefaultVisible", { bg = visible_bg })
--- hl("BufferLineHintVisible", { fg = colors.blue_01, bg = visible_bg })
--- hl("BufferLineErrorVisible", { fg = colors.red_01, bg = visible_bg })
--- hl("BufferLineWarningVisible", { fg = colors.yellow_01, bg = visible_bg })
--- hl("BufferLineInfoVisible", { fg = colors.blue_01, bg = visible_bg })
+  -- NVIMTREE
+  M.patterns.nvimtree_normal = M.patterns.normal
 
--- BUFFERLINE: SELECTED
--- hl("BufferLineBufferSelected", { bg = selected_bg, fg = colors.gray_03, bold = true })
--- hl("BufferLineDuplicateSelected", { link = "BufferLineBufferSelected" })
--- hl("BufferLineModifiedSelected", { link = "BufferLineBufferSelected" })
--- hl("BufferLineIndicatorSelected", { link = "BufferLineBufferSelected" })
--- hl("BufferLineCloseButtonSelected", { link = "BufferLineBufferSelected" })
--- hl("BufferLineDevIconDefaultSelected", { link = "BufferLineBufferSelected" })
--- hl("BufferLinePickSelected", { bg = selected_bg, fg = colors.red_01 })
--- hl("BufferLineHintSelected", { bg = selected_bg, fg = colors.blue_01 })
--- hl("BufferLineErrorSelected", { bg = selected_bg, fg = colors.red_01 })
--- hl("BufferLineWarningSelected", { bg = selected_bg, fg = colors.yellow_01 })
--- hl("BufferLineInfoSelected", { bg = selected_bg, fg = colors.blue_01 })
+  hl("NvimTreeNormal", M.patterns.nvimtree_normal)
+  hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })
+  hl("NvimTreeCursorLine", { bg = M.colors.black_01 })
 
--- DAP VIEW
--- hl("NvimDapViewTab", { link = "BufferLineBackground" })
--- hl("NvimDapViewTabSelected", { link = "BufferLineBufferSelected" })
--- hl("NvimDapViewTabFill", { link = "NvimDapViewTab" })
--- hl("NvimDapViewControlNC", { link = "NvimDapViewTabFill" })
--- hl("NvimDapViewControlPause", { fg = colors.red_01, bg = colors.black_02 })
--- hl("NvimDapViewControlPlay", { link = "NvimDapViewControlPause" })
--- hl("NvimDapViewControlRunLast", { link = "NvimDapViewControlPause" })
+  -- BUFFERLINE
+  M.patterns.bufferline_visible = M.patterns.normal
+  M.patterns.bufferline_hidden = M.patterns.window_status_inactive
 
--- MARKVIEW
--- hl("MarkViewCode", { bg = colors.black_01 })
--- for i = 1, 5 do
---   hl("MarkviewHeading" .. i, { bg = colors.black_00, fg = colors.red_01 })
--- end
+  hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
+  hl("BufferLineBackground", M.patterns.bufferline_hidden)
+  hl("BufferLinePick", vim.tbl_extend("force", M.patterns.bufferline_hidden, { fg = M.colors.red_02, bold = true }))
+  hl("BufferLineHint", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
+  hl("BufferLineError", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.red_02 })
+  hl("BufferLineWarning", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.yellow_02 })
+  hl("BufferLineInfo", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
+  hl("BufferLineDuplicate", { link = "BufferLineBackground" })
+  hl("BufferLineFill", { link = "BufferLineBackground" })
+  hl("BufferLineModified", { link = "BufferLineBackground" })
+  hl("BufferLineCloseButton", { link = "BufferLineBackground" })
+  hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
+  hl("BufferLineDevIconDefaultInactive", { link = "BufferLineBufferSelected" })
 
--- EDGY
--- hl("EdgyWinBar", { link = "WinBar" })
--- hl("EdgyWinBarNC", { link = "WinBarNC" })
--- hl("EdgyNormal", { link = "NvimTreeNormal" })
+  hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
+  hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
+  hl("BufferLineHintVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
+  hl("BufferLineErrorVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
+  hl("BufferLineWarningVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.yellow_02 })
+  hl("BufferLineInfoVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
+  hl("BufferLineDuplicateVisible", { link = "BufferLineBufferVisible" })
+  hl("BufferLineIndicatorVisible", { link = "BufferLineBufferVisible" })
+  hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
+  hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
+  hl("BufferLineDevIconDefaultVisible", { link = "BufferLineBufferVisible" })
+
+  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.bufferline_visible, { bold = true })
+
+  hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
+  hl("BufferLinePickSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.red_02 })
+  hl("BufferLineHintSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.blue_02 })
+  hl("BufferLineErrorSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.red_02 })
+  hl("BufferLineWarningSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.yellow_02 })
+  hl("BufferLineInfoSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.blue_02 })
+  hl("BufferLineDuplicateSelected", { link = "BufferLineBufferSelected" })
+  hl("BufferLineModifiedSelected", { link = "BufferLineBufferSelected" })
+  hl("BufferLineIndicatorSelected", { link = "BufferLineBufferSelected" })
+  hl("BufferLineCloseButtonSelected", { link = "BufferLineBufferSelected" })
+  hl("BufferLineDevIconDefaultSelected", { link = "BufferLineBufferSelected" })
+
+  -- DAP VIEW
+  M.patterns.dapview_visible = vim.tbl_extend("force", M.patterns.bufferline_visible, { bold = true })
+  M.patterns.dapview_hidden = { bg = M.patterns.window_status_inactive.bg, fg = M.patterns.window_status_active.fg }
+
+  hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_02 })
+  hl("NvimDapViewTab", M.patterns.dapview_hidden)
+  hl("NvimDapViewTabSelected", M.patterns.dapview_visible)
+  hl("NvimDapViewTabFill", { link = "NvimDapViewTab" })
+  hl("NvimDapViewControlNC", { link = "NvimDapViewTabFill" })
+  hl("NvimDapViewControlPlay", { link = "NvimDapViewControlPause" })
+  hl("NvimDapViewControlRunLast", { link = "NvimDapViewControlPause" })
+
+  -- MARKVIEW
+  hl("MarkViewCode", { bg = M.colors.black_01 })
+  for i = 1, 5 do
+    hl("MarkviewHeading" .. i, { bg = M.colors.black_00, fg = M.colors.red_02 })
+  end
+
+  -- EDGY
+  hl("EdgyWinBar", { link = "WinBar" })
+  hl("EdgyWinBarNC", { link = "WinBarNC" })
+  hl("EdgyNormal", { link = "NvimTreeNormal" })
+end
+
+M.lualine = function()
+  -- LUALINE
+  M.patterns.lualine_normal = M.patterns.bufferline_selected
+  M.patterns.lualine_inactive = M.patterns.window_status_inactive
+  M.patterns.lualine_insert = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.error.fg }
+  M.patterns.lualine_visual = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.warning.fg }
+  M.patterns.lualine_command = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.info.fg }
+
+  M.patterns.lualine_diff_add = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.ok.fg }
+
+  return {
+    normal = {
+      a = M.patterns.lualine_normal,
+      b = M.patterns.lualine_normal,
+      c = M.patterns.lualine_normal,
+    },
+    insert = {
+      a = M.patterns.lualine_insert,
+      b = M.patterns.lualine_insert,
+      c = M.patterns.lualine_insert,
+    },
+    visual = {
+      a = M.patterns.lualine_visual,
+      b = M.patterns.lualine_visual,
+      c = M.patterns.lualine_visual,
+    },
+    replace = {
+      a = M.patterns.lualine_visual,
+      b = M.patterns.lualine_visual,
+      c = M.patterns.lualine_visual,
+    },
+    command = {
+      a = M.patterns.lualine_command,
+      b = M.patterns.lualine_command,
+      c = M.patterns.lualine_command,
+    },
+    inactive = {
+      a = M.patterns.lualine_inactive,
+      b = M.patterns.lualine_inactive,
+      c = M.patterns.lualine_inactive,
+    },
+  }
+end
+
+return M
