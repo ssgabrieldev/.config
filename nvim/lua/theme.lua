@@ -27,7 +27,7 @@ M.patterns = {}
 M.patterns.normal = { bg = M.colors.black_00, fg = M.colors.gray_01 }
 M.patterns.alt_normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
 M.patterns.alt_border = { bg = M.patterns.alt_normal.bg, fg = M.patterns.normal.bg }
-M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01 }
+M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01, bold = true }
 M.patterns.window_status_inactive = { bg = M.colors.black_01, fg = M.colors.gray_00 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
@@ -62,10 +62,10 @@ M.setup = function()
   hl("Keyword", { fg = M.colors.red_02 })
 
   -- WINDOW CONTENT
-  hl("CursorLine", { bg = M.colors.black_01 })
+  hl("CursorLine", { bg = M.patterns.normal.bg })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.alt_normal)
-  hl("Visual", { link = "CursorLine" })
+  hl("Visual", { bg = M.colors.black_01 })
   hl("CursorLineNr", { link = "Keyword" })
   hl("Directory", { link = "Normal" })
 
@@ -126,7 +126,7 @@ M.setup = function()
   -- WINDOW DECORATION
   hl("StatusLineNC", M.patterns.window_status_inactive)
   hl("FloatBorder", M.patterns.alt_border)
-  hl("WinSeparator", { bg = M.patterns.normal.bg, fg = M.patterns.window_status_active.bg })
+  hl("WinSeparator", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("WinBarActive", M.patterns.window_status_active)
   hl("WinBarInactive", M.patterns.window_status_inactive)
   hl("WinBar", { link = "WinBarActive" })
@@ -142,11 +142,9 @@ M.setup = function()
 
   hl("NvimTreeNormal", M.patterns.nvimtree_normal)
   hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })
-  hl("NvimTreeCursorLine", { bg = M.colors.black_01 })
 
   -- BUFFERLINE
-  M.patterns.bufferline_visible = M.patterns.normal
-  M.patterns.bufferline_hidden = M.patterns.window_status_inactive
+  M.patterns.bufferline_hidden = M.patterns.normal
 
   hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
   hl("BufferLineBackground", M.patterns.bufferline_hidden)
@@ -162,6 +160,8 @@ M.setup = function()
   hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
   hl("BufferLineDevIconDefaultInactive", { link = "BufferLineBufferSelected" })
 
+  M.patterns.bufferline_visible = M.patterns.normal
+
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
   hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
   hl("BufferLineHintVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
@@ -174,14 +174,14 @@ M.setup = function()
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineDevIconDefaultVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.bufferline_visible, { bold = true })
+  M.patterns.bufferline_selected = M.patterns.window_status_active
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
-  hl("BufferLinePickSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.red_02 })
-  hl("BufferLineHintSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.blue_02 })
-  hl("BufferLineErrorSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.red_02 })
-  hl("BufferLineWarningSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.yellow_02 })
-  hl("BufferLineInfoSelected", { bg = M.patterns.bufferline_selected.bg, fg = M.colors.blue_02 })
+  hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
+  hl("BufferLineHintSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
+  hl("BufferLineErrorSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
+  hl("BufferLineWarningSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.yellow_02 }))
+  hl("BufferLineInfoSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
   hl("BufferLineDuplicateSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineModifiedSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineIndicatorSelected", { link = "BufferLineBufferSelected" })
@@ -189,8 +189,8 @@ M.setup = function()
   hl("BufferLineDevIconDefaultSelected", { link = "BufferLineBufferSelected" })
 
   -- DAP VIEW
-  M.patterns.dapview_visible = vim.tbl_extend("force", M.patterns.bufferline_visible, { bold = true })
-  M.patterns.dapview_hidden = { bg = M.patterns.window_status_inactive.bg, fg = M.patterns.window_status_active.fg }
+  M.patterns.dapview_visible = M.patterns.window_status_active
+  M.patterns.dapview_hidden = M.patterns.normal
 
   hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_02 })
   hl("NvimDapViewTab", M.patterns.dapview_hidden)
@@ -213,13 +213,11 @@ M.setup = function()
 end
 
 M.lualine = function()
-  -- LUALINE
-  M.patterns.lualine_normal = M.patterns.bufferline_selected
+  M.patterns.lualine_normal = M.patterns.normal
   M.patterns.lualine_inactive = M.patterns.window_status_inactive
   M.patterns.lualine_insert = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.error.fg }
   M.patterns.lualine_visual = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.warning.fg }
   M.patterns.lualine_command = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.info.fg }
-
   M.patterns.lualine_diff_add = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.ok.fg }
 
   return {
@@ -252,7 +250,7 @@ M.lualine = function()
       a = M.patterns.lualine_inactive,
       b = M.patterns.lualine_inactive,
       c = M.patterns.lualine_inactive,
-    },
+    }
   }
 end
 
