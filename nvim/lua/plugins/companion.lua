@@ -10,12 +10,11 @@ require("copilot").setup({
   suggestion = {
     auto_trigger = false,
     enabled = true,
-    -- COPILOT: keys
     keymap = {
       accept = "<leader>ca",
       next = "<leader>cn",
       prev = "<leader>cp",
-      dismiss = "<leader>cd"
+      dismiss = "<leader>cd",
     }
   },
   panel = { enabled = false },
@@ -34,6 +33,7 @@ require("codecompanion").setup({
     }
   }
 })
+
 vim.keymap.set("n", "<leader>cc", "<cmd>CodeCompanionActions<cr>", {
   desc = "Code Companion Actions",
   silent = true

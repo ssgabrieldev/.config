@@ -26,7 +26,13 @@ require("blink.cmp").setup({
     ghost_text = { enabled = true }
   },
   sources = {
-    default = { "lsp", "path", "snippets", "buffer" },
+    default = { "lsp", "path", "snippets", "buffer", "codecompanion" },
+    providers = {
+      codecompanion = {
+        name = "CodeCompanion",
+        module = "codecompanion.providers.completion.blink",
+      },
+    },
   },
   keymap = {
     ["<s-tab>"] = { "select_prev", "fallback" },
