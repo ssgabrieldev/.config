@@ -48,7 +48,7 @@ M.setup = function()
 
   -- NEOVIM BASE
   hl("Normal", M.patterns.normal)
-  hl("Comment", vim.tbl_extend('force', M.patterns.normal, { fg = M.colors.gray_00 }))
+  hl("Comment", { fg = M.colors.gray_00 })
   hl("StatusLine", M.patterns.window_status_active)
   hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
@@ -210,6 +210,14 @@ M.setup = function()
   hl("EdgyWinBar", { link = "WinBar" })
   hl("EdgyWinBarNC", { link = "WinBarNC" })
   hl("EdgyNormal", { link = "NvimTreeNormal" })
+
+  -- Blink
+  hl("BlinkCmpMenu", { link = "NormalFloat" })
+  hl("BlinkCmpMenuBorder", { link = "FloatBorder" })
+  hl("BlinkCmpDoc", { link = "BlinkCmpMenu" })
+  hl("BlinkCmpDocBorder", { link = "BlinkCmpMenuBorder" })
+  hl("BlinkCmpKind", { bg = M.patterns.alt_normal.bg, fg = M.colors.red_02 })
+  hl("BlinkCmpMenuSelection", { bg = M.patterns.normal.bg })
 end
 
 M.lualine = function()
