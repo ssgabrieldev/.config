@@ -8,7 +8,6 @@ vim.pack.add({
   "https://github.com/nvim-telescope/telescope-dap.nvim",
   "https://github.com/rcarriga/nvim-notify",
   "https://github.com/nvim-tree/nvim-tree.lua",
-  "https://github.com/igorlfs/nvim-dap-view"
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 local js_debugger = { "pwa-chrome", "pwa-node" }

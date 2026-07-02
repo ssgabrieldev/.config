@@ -1,7 +1,7 @@
 local vim = vim
 
 vim.pack.add({
-  "rcarriga/nvim-notify",
+  "https://github.com/rcarriga/nvim-notify",
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 require("notify").setup({

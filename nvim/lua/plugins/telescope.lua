@@ -2,11 +2,10 @@ local vim = vim
 
 vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
-  "https://github.com/vim-lua/plenary.nvim",
-  "https://github.com/fussenegger/nvim-dap",
-  "https://github.com/vim-telescope/telescope-dap.nvim",
-  "https://github.com/vim-telescope/telescope-ui-select.nvim",
-  "https://github.com/vim-telescope/telescope-live-grep-args.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-telescope/telescope-dap.nvim",
+  "https://github.com/nvim-telescope/telescope-ui-select.nvim",
+  "https://github.com/nvim-telescope/telescope-live-grep-args.nvim",
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 require("telescope").load_extension("ui-select")

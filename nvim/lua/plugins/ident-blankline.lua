@@ -1,7 +1,7 @@
 local vim = vim
 
 vim.pack.add({
-  "lukas-reineke/indent-blankline.nvim"
+  "https://github.com/lukas-reineke/indent-blankline.nvim"
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 require("ibl").setup({
