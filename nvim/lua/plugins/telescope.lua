@@ -16,10 +16,9 @@ require("telescope").setup({
   },
   defaults = {
     preview = true,
-    layout_strategy = "horizontal",
-    sorting_strategy = "ascending",
+    layout_strategy = "vertical",
+    sorting_strategy = "descending",
     borderchars = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
-    layout_config = { horizontal = { prompt_position = "top" } },
     file_ignore_patterns = { "node_modules", ".git/" },
     mappings = {
       n = {
