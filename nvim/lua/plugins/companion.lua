@@ -1,4 +1,8 @@
 local vim = vim
+local copilot_adapter = {
+  name = "copilot",
+  model = "gpt-4.1",
+}
 
 vim.pack.add({
   "https://github.com/zbirenbaum/copilot.lua",
@@ -21,15 +25,15 @@ require("copilot").setup({
 })
 
 require("codecompanion").setup({
-  strategies = {
+  interactions = {
     chat = {
-      adapter = "copilot",
+      adapter = copilot_adapter,
     },
     inline = {
-      adapter = "copilot",
+      adapter = copilot_adapter,
     },
     cmd = {
-      adapter = "copilot",
+      adapter = copilot_adapter,
     }
   }
 })
