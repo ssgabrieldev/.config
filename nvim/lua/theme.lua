@@ -126,7 +126,7 @@ M.setup = function()
   -- WINDOW DECORATION
   hl("StatusLineNC", M.patterns.window_status_inactive)
   hl("FloatBorder", M.patterns.alt_border)
-  hl("WinSeparator", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
+  hl("WinSeparator", { bg = M.patterns.normal.bg, fg = M.patterns.alt_normal.bg })
   hl("WinBarActive", M.patterns.window_status_active)
   hl("WinBarInactive", M.patterns.window_status_inactive)
   hl("WinBar", { link = "WinBarActive" })
