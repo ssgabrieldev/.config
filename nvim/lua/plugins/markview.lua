@@ -32,7 +32,7 @@ require("markview").setup({
       pad_amount = 0,
       wrap = true,
       sign = false,
-      style = "block",
+      style = "simple",
       label_direction = "right"
     }
   }
