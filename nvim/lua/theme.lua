@@ -2,9 +2,9 @@ local vim = vim
 
 local M = {
   colors = {
-    black_00  = "#000000",
+    black_00  = "#050505",
     black_01  = "#0f0f0f",
-    black_02  = "#262626",
+    black_02  = "#2f2f2f",
     red_00    = "#660708",
     red_01    = "#a4161a",
     red_02    = "#ba181b",
@@ -201,7 +201,7 @@ M.setup = function()
   hl("NvimDapViewControlRunLast", { link = "NvimDapViewControlPause" })
 
   -- MARKVIEW
-  hl("MarkViewCode", { bg = M.colors.black_01 })
+  hl("MarkViewCode", { bg = M.patterns.normal.bg, fg = M.colors.gray_02, bold = true })
   for i = 1, 5 do
     hl("MarkviewHeading" .. i, { bg = M.colors.black_00, fg = M.colors.red_02 })
   end
