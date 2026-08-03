@@ -14,10 +14,10 @@ require("toggleterm").setup({
     title_pos = "center",
     winblend = 0,
     width = function()
-      return vim.o.columns - 2
+      return vim.o.columns
     end,
     height = function()
-      return vim.o.lines - 4
+      return vim.o.lines
     end,
   },
   highlights = {

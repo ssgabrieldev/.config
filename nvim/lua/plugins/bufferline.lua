@@ -9,7 +9,7 @@ require("bufferline").setup({
     mode = "buffers",
     separator_style = { "", "" },
     indicator = { icon = "", style = "none" },
-    themable = true,
+    themable = false,
     diagnostics = "nvim_lsp",
     diagnostics_indicator = false,
     offsets = {
