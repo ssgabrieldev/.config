@@ -1,4 +1,5 @@
 local vim = vim
+local border_style = vim.g.border_style
 
 vim.pack.add({
   "https://github.com/nvim-telescope/telescope.nvim",
@@ -18,7 +19,7 @@ require("telescope").setup({
     preview = true,
     layout_strategy = "vertical",
     sorting_strategy = "descending",
-    borderchars = { "▔", "▕", "▁", "▏", "🭽", "🭾", "🭿", "🭼" },
+    borderchars = { border_style[2], border_style[4], border_style[6], border_style[8], border_style[1], border_style[3], border_style[5], border_style[7] },
     file_ignore_patterns = { "node_modules", ".git/" },
     mappings = {
       n = {

@@ -1,7 +1,8 @@
 local vim = vim
 
 vim.g.mapleader = ";"
-vim.g.border_style = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
+-- vim.g.border_style = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
+vim.g.border_style = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"}
 
 if vim.fn.executable("/usr/bin/fish") == 1 then
   vim.o.shell = "/usr/bin/fish"
@@ -53,6 +54,6 @@ vim.opt.foldlevel = 99
 
 vim.o.confirm = true
 
-require("theme").setup()
+-- require("theme").setup()
 require("keymaps")
 require("plugins")

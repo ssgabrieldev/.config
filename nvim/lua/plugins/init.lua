@@ -1,3 +1,4 @@
+require("plugins.vscode-theme")
 require("plugins.toggleterm")
 require("plugins.nvim-tree")
 require("plugins.bufferline")
