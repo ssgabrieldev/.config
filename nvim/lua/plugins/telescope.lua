@@ -17,7 +17,13 @@ require("telescope").setup({
   },
   defaults = {
     preview = true,
+    dynamic_preview_title = true,
     layout_strategy = "vertical",
+    layout_config = {
+      vertical = {
+        preview_cutoff = 0
+      }
+    },
     sorting_strategy = "descending",
     borderchars = { border_style[2], border_style[4], border_style[6], border_style[8], border_style[1], border_style[3], border_style[5], border_style[7] },
     file_ignore_patterns = { "node_modules", ".git/" },
