@@ -15,7 +15,15 @@ require("blink.cmp").setup({
     enabled = true,
     keymap = { preset = 'cmdline' },
     sources = { 'buffer', 'cmdline' },
-    completion = { menu = { auto_show = true } }
+    completion = {
+      menu = { auto_show = true },
+      list = {
+        selection = {
+          preselect = false,
+          auto_insert = true
+        }
+      },
+    }
   },
   completion = {
     menu = {
@@ -27,7 +35,13 @@ require("blink.cmp").setup({
         border = vim.g.border_style
       }
     },
-    ghost_text = { enabled = true }
+    ghost_text = { enabled = true },
+    list = {
+      selection = {
+        preselect = false,
+        auto_insert = true
+      }
+    },
   },
   sources = {
     default = { "lsp", "path", "snippets", "buffer", "codecompanion" },

@@ -59,7 +59,6 @@ vim.o.confirm = true
 require("keymaps")
 
 -- THEMES
--- require("plugins.vscode-theme")
 require("theme").setup()
 
 -- PLUGINS
