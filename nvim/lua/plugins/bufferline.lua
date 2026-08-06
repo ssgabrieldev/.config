@@ -8,7 +8,7 @@ require("bufferline").setup({
   options = {
     mode = "buffers",
     separator_style = { "", "" },
-    indicator = { icon = "▎", style = "icon" },
+    indicator = { icon = "▎", style = "none" },
     diagnostics = "nvim_lsp",
     diagnostics_indicator = true,
     color_icons = true,

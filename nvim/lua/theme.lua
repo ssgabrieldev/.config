@@ -4,9 +4,9 @@ local vim = vim
 
 local M = {
   colors = {
-    black_00  = "#050505",
-    black_01  = "#0f0f0f",
-    black_02  = "#2f2f2f",
+    black_00  = "#000000",
+    black_01  = "#050505",
+    black_02  = "#0f0f0f",
     red_00    = "#660708",
     red_01    = "#a4161a",
     red_02    = "#ba181b",
@@ -26,10 +26,9 @@ local M = {
 }
 
 M.patterns = {}
-M.patterns.normal = { bg = M.colors.black_00, fg = M.colors.gray_01 }
-M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_02 }
-M.patterns.alt_normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
-M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01 }
+M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
+M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00 }
+M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_01 }
 M.patterns.window_status_inactive = { bg = M.colors.black_01, fg = M.colors.gray_00 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
@@ -51,7 +50,7 @@ M.setup = function()
   -- NEOVIM BASE
   hl("Normal", M.patterns.normal)
   hl("Comment", { fg = M.colors.gray_00 })
-  hl("StatusLine", M.patterns.window_status_active)
+  hl("StatusLine", M.patterns.status_line)
   hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
   hl("DiagnosticError", vim.tbl_extend('force', M.patterns.error, { bg = 'NONE' }))
@@ -126,11 +125,11 @@ M.setup = function()
   hl("@markup.raw.block.markdown", { bold = true })
 
   -- WINDOW DECORATION
-  hl("StatusLineNC", M.patterns.window_status_inactive)
-  hl("FloatBorder", M.patterns.border)
+  hl("StatusLineNC", M.patterns.status_line)
+  hl("FloatBorder", M.patterns.normal)
   hl("WinSeparator", M.patterns.border)
-  hl("WinBarActive", M.patterns.window_status_active)
-  hl("WinBarInactive", M.patterns.window_status_inactive)
+  hl("WinBarActive", M.patterns.normal)
+  hl("WinBarInactive", M.patterns.normal)
   hl("WinBar", { link = "WinBarActive" })
   hl("WinBarNC", { link = "WinBarInactive" })
 
@@ -174,7 +173,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.normal, { bold = true })
+  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.normal, { bold = true, underline = true })
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
@@ -205,7 +204,8 @@ M.setup = function()
         hl(hl_group .. "Selected", {
           bg = M.patterns.bufferline_selected.bg,
           fg = fg_color,
-          bold = true
+          bold = true,
+          underline = true,
         })
       end
     end
@@ -240,12 +240,12 @@ M.setup = function()
   hl("BlinkCmpDoc", { link = "BlinkCmpMenu" })
   hl("BlinkCmpDocBorder", { link = "BlinkCmpMenuBorder" })
   hl("BlinkCmpKind", { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
-  hl("BlinkCmpMenuSelection", { bg = M.patterns.alt_normal.bg })
+  hl("BlinkCmpMenuSelection", { bg = M.colors.black_02 })
 end
 
 M.lualine = function()
-  M.patterns.lualine_normal = M.patterns.alt_normal
-  M.patterns.lualine_inactive = M.patterns.window_status_inactive
+  M.patterns.lualine_normal = M.patterns.status_line
+  M.patterns.lualine_inactive = M.patterns.status_line
   M.patterns.lualine_insert = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.error.fg }
   M.patterns.lualine_visual = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.warning.fg }
   M.patterns.lualine_command = { bg = M.patterns.lualine_normal.bg, fg = M.patterns.info.fg }

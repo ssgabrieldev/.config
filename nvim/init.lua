@@ -59,7 +59,6 @@ vim.o.confirm = true
 require("keymaps")
 
 -- THEMES
-require("theme").setup()
 
 -- PLUGINS
 require("plugins.toggleterm")
@@ -77,3 +76,4 @@ require("plugins.companion")
 require("plugins.markview")
 require("plugins.git")
 require("plugins.blink")
+require("theme").setup()
