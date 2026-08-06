@@ -58,8 +58,6 @@ vim.o.confirm = true
 
 require("keymaps")
 
--- THEMES
-
 -- PLUGINS
 require("plugins.toggleterm")
 require("plugins.nvim-tree")

@@ -207,6 +207,11 @@ M.setup = function()
           bold = true,
           underline = true,
         })
+        hl(hl_group .. "Inactive", {
+          bg = M.patterns.bufferline_selected.bg,
+          fg = fg_color,
+          bold = true,
+        })
       end
     end
   end
