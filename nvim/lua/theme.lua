@@ -1,3 +1,5 @@
+local web_devicons_status_ok, web_devicons = pcall(require, "nvim-web-devicons")
+
 local vim = vim
 
 local M = {
@@ -62,7 +64,7 @@ M.setup = function()
   hl("Keyword", { fg = M.colors.red_02 })
 
   -- WINDOW CONTENT
-  hl("CursorLine", { bg = M.colors.black_01 })
+  hl("CursorLine", { bg = M.patterns.normal.bg })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
   hl("Visual", { bg = M.colors.black_02 })
@@ -158,9 +160,8 @@ M.setup = function()
   hl("BufferLineModified", { link = "BufferLineBackground" })
   hl("BufferLineCloseButton", { link = "BufferLineBackground" })
   hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
-  hl("BufferLineDevIconDefaultInactive", { link = "BufferLineBufferSelected" })
 
-  M.patterns.bufferline_visible = M.patterns.normal
+  M.patterns.bufferline_visible = M.patterns.window_status_active
 
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
   hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
@@ -172,9 +173,8 @@ M.setup = function()
   hl("BufferLineIndicatorVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
-  hl("BufferLineDevIconDefaultVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = M.patterns.window_status_active
+  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.window_status_active, { bold = true })
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
@@ -186,7 +186,30 @@ M.setup = function()
   hl("BufferLineModifiedSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineIndicatorSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineCloseButtonSelected", { link = "BufferLineBufferSelected" })
-  hl("BufferLineDevIconDefaultSelected", { link = "BufferLineBufferSelected" })
+
+  if web_devicons_status_ok then
+    local icons = web_devicons.get_icons()
+    for _, icon_data in pairs(icons) do
+      if icon_data.name then
+        local hl_group = "BufferLineDevIcon" .. icon_data.name
+        local fg_color = icon_data.color
+
+        hl(hl_group, {
+          bg = M.patterns.bufferline_hidden.bg,
+          fg = fg_color,
+        })
+        hl(hl_group .. "Visible", {
+          bg = M.patterns.bufferline_visible.bg,
+          fg = fg_color,
+        })
+        hl(hl_group .. "Selected", {
+          bg = M.patterns.bufferline_selected.bg,
+          fg = fg_color,
+          bold = true
+        })
+      end
+    end
+  end
 
   -- DAP VIEW
   M.patterns.dapview_visible = M.patterns.window_status_active

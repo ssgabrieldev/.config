@@ -8,10 +8,10 @@ require("bufferline").setup({
   options = {
     mode = "buffers",
     separator_style = { "", "" },
-    indicator = { icon = "", style = "none" },
-    themable = false,
+    indicator = { icon = "▏", style = "icon" },
     diagnostics = "nvim_lsp",
-    diagnostics_indicator = false,
+    diagnostics_indicator = true,
+    color_icons = true,
     offsets = {
       { filetype = "NvimTree",      text = "", text_align = "center", separator = true, highlight = "NvimTreeNormal" },
       { filetype = "codecompanion", text = "", text_align = "center", separator = true, highlight = "NvimTreeNormal" },

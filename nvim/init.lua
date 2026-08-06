@@ -2,8 +2,8 @@ local vim = vim
 
 vim.g.mapleader = ";"
 -- vim.g.border_style = { "🭽", "▔", "🭾", "▕", "🭿", "▁", "🭼", "▏" }
-vim.g.border_style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
--- vim.g.border_style = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
+-- vim.g.border_style = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" }
+vim.g.border_style = { "┌", "─", "┐", "│", "┘", "─", "└", "│" }
 
 if vim.fn.executable("/usr/bin/fish") == 1 then
   vim.o.shell = "/usr/bin/fish"
@@ -58,7 +58,6 @@ vim.o.confirm = true
 require("keymaps")
 
 -- THEMES
-require("theme").setup()
 -- require("plugins.vscode-theme")
 
 -- PLUGINS
@@ -77,3 +76,4 @@ require("plugins.companion")
 require("plugins.markview")
 require("plugins.git")
 require("plugins.blink")
+require("theme").setup()
