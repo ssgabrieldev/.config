@@ -29,7 +29,7 @@ M.patterns = {}
 M.patterns.normal = { bg = M.colors.black_00, fg = M.colors.gray_01 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_02 }
 M.patterns.alt_normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
-M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01, bold = true }
+M.patterns.window_status_active = { bg = M.colors.black_01, fg = M.colors.gray_01 }
 M.patterns.window_status_inactive = { bg = M.colors.black_01, fg = M.colors.gray_00 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
@@ -161,7 +161,7 @@ M.setup = function()
   hl("BufferLineCloseButton", { link = "BufferLineBackground" })
   hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
 
-  M.patterns.bufferline_visible = M.patterns.window_status_active
+  M.patterns.bufferline_visible = M.patterns.normal
 
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
   hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
@@ -174,7 +174,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.window_status_active, { bold = true })
+  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.normal, { bold = true })
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
@@ -212,8 +212,8 @@ M.setup = function()
   end
 
   -- DAP VIEW
-  M.patterns.dapview_visible = M.patterns.window_status_active
-  M.patterns.dapview_hidden = M.patterns.normal
+  M.patterns.dapview_visible = M.patterns.bufferline_selected
+  M.patterns.dapview_hidden = vim.tbl_extend("force", M.patterns.normal, { bold = false })
 
   hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_02 })
   hl("NvimDapViewTab", M.patterns.dapview_hidden)
