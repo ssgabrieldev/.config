@@ -10,7 +10,7 @@ local M = {
     red_00    = "#660708",
     red_01    = "#a4161a",
     red_02    = "#ba181b",
-    gray_00   = "#495057",
+    gray_00   = "#1f1f1f",
     gray_01   = "#6c757d",
     gray_02   = "#adb5bd",
     yellow_00 = "#c36f09",
@@ -26,10 +26,9 @@ local M = {
 }
 
 M.patterns = {}
-M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
+M.patterns.normal = { bg = M.colors.black_02, fg = M.colors.gray_02 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00 }
-M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_01 }
-M.patterns.window_status_inactive = { bg = M.colors.black_01, fg = M.colors.gray_00 }
+M.patterns.status_line = { bg = M.colors.black_01, fg = M.colors.gray_01 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
 M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
@@ -49,7 +48,7 @@ M.setup = function()
 
   -- NEOVIM BASE
   hl("Normal", M.patterns.normal)
-  hl("Comment", { fg = M.colors.gray_00 })
+  hl("Comment", { fg = M.colors.gray_01 })
   hl("StatusLine", M.patterns.status_line)
   hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
@@ -66,7 +65,7 @@ M.setup = function()
   hl("CursorLine", { bg = M.patterns.normal.bg })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
-  hl("Visual", { bg = M.colors.black_02 })
+  hl("Visual", { bg = M.colors.gray_00 })
   hl("CursorLineNr", { link = "Keyword" })
   hl("Directory", { link = "Normal" })
 
@@ -173,7 +172,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = vim.tbl_extend("force", M.patterns.normal, { bold = true, underline = true })
+  M.patterns.bufferline_selected = { bg = M.colors.gray_00, bold = true }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
@@ -195,22 +194,20 @@ M.setup = function()
 
         hl(hl_group, {
           bg = M.patterns.bufferline_hidden.bg,
-          fg = fg_color,
+          fg = fg_color
         })
         hl(hl_group .. "Visible", {
           bg = M.patterns.bufferline_visible.bg,
-          fg = fg_color,
+          fg = fg_color
+        })
+        hl(hl_group .. "Inactive", {
+          bg = M.patterns.bufferline_visible.bg,
+          fg = fg_color
         })
         hl(hl_group .. "Selected", {
           bg = M.patterns.bufferline_selected.bg,
           fg = fg_color,
-          bold = true,
-          underline = true,
-        })
-        hl(hl_group .. "Inactive", {
-          bg = M.patterns.bufferline_selected.bg,
-          fg = fg_color,
-          bold = true,
+          bold = true
         })
       end
     end
@@ -245,7 +242,7 @@ M.setup = function()
   hl("BlinkCmpDoc", { link = "BlinkCmpMenu" })
   hl("BlinkCmpDocBorder", { link = "BlinkCmpMenuBorder" })
   hl("BlinkCmpKind", { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
-  hl("BlinkCmpMenuSelection", { bg = M.colors.black_02 })
+  hl("BlinkCmpMenuSelection", { link = "Visual" })
 end
 
 M.lualine = function()
