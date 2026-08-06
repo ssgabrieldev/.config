@@ -1,4 +1,5 @@
 local vim = vim
+local wo = { winfixbuf = true, winbar = "", winhighlight = "", signcolumn = "no" }
 
 vim.pack.add({
   "https://github.com/folke/edgy.nvim",
@@ -15,40 +16,40 @@ require("edgy").setup({
   bottom = {
     {
       ft = "toggleterm",
-      wo = { winfixbuf = true, winbar = "", winhighlight = "" },
+      wo = wo,
       filter = function(buf, win)
         return vim.api.nvim_win_get_config(win).relative == ""
       end,
     },
     {
       ft = "dap-view://main",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
     {
       ft = "dap-view-term",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
     {
       ft = "dap-view",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
     {
       ft = "dap-repl",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
     {
       ft = "qf",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
     {
       ft = "help",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
   },
   right = {
     {
       ft = "codecompanion",
-      wo = { winfixbuf = true, winbar = false, winhighlight = "" }
+      wo = wo,
     },
   },
   options = {
