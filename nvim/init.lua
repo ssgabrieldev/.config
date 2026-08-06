@@ -56,4 +56,24 @@ vim.opt.foldlevel = 99
 vim.o.confirm = true
 
 require("keymaps")
-require("plugins")
+
+-- THEMES
+require("theme").setup()
+-- require("plugins.vscode-theme")
+
+-- PLUGINS
+require("plugins.toggleterm")
+require("plugins.nvim-tree")
+require("plugins.bufferline")
+require("plugins.telescope")
+require("plugins.ident-blankline")
+require("plugins.edgy")
+require("plugins.mason")
+require("plugins.treesitter")
+require("plugins.lualine")
+require("plugins.notify")
+require("plugins.dap")
+require("plugins.companion")
+require("plugins.markview")
+require("plugins.git")
+require("plugins.blink")
