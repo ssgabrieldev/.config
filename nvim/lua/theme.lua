@@ -7,20 +7,16 @@ local M = {
     black_00  = "#000000",
     black_01  = "#050505",
     black_02  = "#0f0f0f",
+    black_03  = "#2f2f2f",
     red_00    = "#660708",
-    red_01    = "#a4161a",
     red_02    = "#ba181b",
     gray_00   = "#495057",
-    gray_01   = "#6c757d",
     gray_02   = "#adb5bd",
     yellow_00 = "#c36f09",
-    yellow_01 = "#eeba0b",
     yellow_02 = "#f4e409",
     blue_00   = "#023e8a",
-    blue_01   = "#0077b6",
     blue_02   = "#0096c7",
     green_00  = "#006400",
-    green_01  = "#007200",
     green_02  = "#008000"
   }
 }
@@ -28,7 +24,7 @@ local M = {
 M.patterns = {}
 M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00 }
-M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_01 }
+M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_02 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
 M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
@@ -48,7 +44,7 @@ M.setup = function()
 
   -- NEOVIM BASE
   hl("Normal", M.patterns.normal)
-  hl("Comment", { fg = M.colors.gray_01 })
+  hl("Comment", { fg = M.colors.gray_00 })
   hl("StatusLine", M.patterns.status_line)
   hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
@@ -65,7 +61,7 @@ M.setup = function()
   hl("CursorLine", { bg = M.patterns.normal.bg })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
-  hl("Visual", { bg = M.colors.black_02 })
+  hl("Visual", { bg = M.colors.black_03 })
   hl("CursorLineNr", { link = "Keyword" })
   hl("Directory", { link = "Normal" })
 
@@ -172,7 +168,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = { bg = M.colors.gray_00, bold = true }
+  M.patterns.bufferline_selected = { bg = M.colors.black_03, bold = true }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
@@ -226,9 +222,9 @@ M.setup = function()
   hl("NvimDapViewControlRunLast", { link = "NvimDapViewControlPause" })
 
   -- MARKVIEW
-  hl("MarkViewCode", { bg = M.patterns.normal.bg, fg = M.colors.gray_02, bold = true })
+  hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_02, bold = true })
   for i = 1, 5 do
-    hl("MarkviewHeading" .. i, { bg = M.colors.black_00, fg = M.colors.red_02 })
+    hl("MarkviewHeading" .. i, { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
   end
 
   -- EDGY
