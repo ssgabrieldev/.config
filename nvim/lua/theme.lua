@@ -10,7 +10,7 @@ local M = {
     red_00    = "#660708",
     red_01    = "#a4161a",
     red_02    = "#ba181b",
-    gray_00   = "#1f1f1f",
+    gray_00   = "#495057",
     gray_01   = "#6c757d",
     gray_02   = "#adb5bd",
     yellow_00 = "#c36f09",
@@ -26,9 +26,9 @@ local M = {
 }
 
 M.patterns = {}
-M.patterns.normal = { bg = M.colors.black_02, fg = M.colors.gray_02 }
+M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00 }
-M.patterns.status_line = { bg = M.colors.black_01, fg = M.colors.gray_01 }
+M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_01 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
 M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
@@ -65,7 +65,7 @@ M.setup = function()
   hl("CursorLine", { bg = M.patterns.normal.bg })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
-  hl("Visual", { bg = M.colors.gray_00 })
+  hl("Visual", { bg = M.colors.black_02 })
   hl("CursorLineNr", { link = "Keyword" })
   hl("Directory", { link = "Normal" })
 
@@ -138,7 +138,7 @@ M.setup = function()
   hl("TelescopeTitle", { link = "FloatBorder" })
 
   -- NVIMTREE
-  M.patterns.nvimtree_normal = M.patterns.normal
+  M.patterns.nvimtree_normal = { bg = M.colors.black_01 }
 
   hl("NvimTreeNormal", M.patterns.nvimtree_normal)
   hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })

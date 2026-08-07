@@ -20,11 +20,11 @@ require("toggleterm").setup({
       return vim.o.lines
     end,
   },
-  highlights = {
-    Normal = {
-      link = "NvimTreeNormal"
-    }
-  }
+  -- highlights = {
+  --   Normal = {
+  --     link = "NvimTreeNormal"
+  --   }
+  -- }
 })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()
