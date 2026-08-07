@@ -11,9 +11,5 @@ vim.g.neominimap = {
   },
 }
 
-vim.keymap.set("n", "<leader>mm", function()
-  require('neominimap.api').toggle()
-end
-, {
-  desc = "Toggle Markview Preview"
-})
+vim.keymap.set("n", "<leader>mm", "<CMD>Neominimap Toggle<CR>" , { desc = "Mini Map Toggle" })
+vim.keymap.set("n", "<leader>mf", "<CMD>Neominimap ToggleFocus<CR>" , { desc = "Mini Map Toggle Focus" })
