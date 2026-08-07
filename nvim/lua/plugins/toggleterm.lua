@@ -8,7 +8,7 @@ require("toggleterm").setup({
   persist_size = false,
   persist_mode = true,
   shade_terminals = false,
-  winbar = { enabled = false },
+  winbar = { enabled = true },
   float_opts = {
     border = vim.g.border_style,
     title_pos = "center",
@@ -20,11 +20,6 @@ require("toggleterm").setup({
       return vim.o.lines
     end,
   },
-  -- highlights = {
-  --   Normal = {
-  --     link = "NvimTreeNormal"
-  --   }
-  -- }
 })
 
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()

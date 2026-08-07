@@ -38,6 +38,6 @@ require("markview").setup({
   }
 })
 
-vim.keymap.set("n", "<leader>mt", "<cmd>Markview toggle<cr>", {
+vim.keymap.set("n", "<leader>mv", "<cmd>Markview toggle<cr>", {
   desc = "Toggle Markview Preview"
 })
