@@ -46,6 +46,7 @@ vim.opt.directory = "/tmp//"
 vim.opt.splitright = true
 vim.opt.smartindent = true
 vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 25
 vim.opt.termsync = false
 vim.opt.timeout = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"

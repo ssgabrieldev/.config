@@ -8,7 +8,7 @@ require("toggleterm").setup({
   persist_size = false,
   persist_mode = true,
   shade_terminals = false,
-  winbar = { enabled = true },
+  winbar = { enabled = false },
   float_opts = {
     border = vim.g.border_style,
     title_pos = "center",

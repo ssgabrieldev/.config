@@ -63,7 +63,7 @@ end
 
 require("dap-view").setup({
   winbar = {
-    default_section = "repl",
+    default_section = "watches",
     sections = { "watches", "scopes", "exceptions", "breakpoints", "threads", "repl", "console" },
     controls = { enabled = true },
     base_sections = {
@@ -102,7 +102,7 @@ vim.keymap.set("n", "<leader>db", function()
   require("dap").toggle_breakpoint()
 end, { desc = "DAP: Toggle Breakpoint" })
 vim.keymap.set("n", "<leader>de", function()
-  require("dap").terminate({}, {}, {
+  require("dap").terminate({
     on_done = function()
       vim.notify("Debugger terminated", "info")
     end,

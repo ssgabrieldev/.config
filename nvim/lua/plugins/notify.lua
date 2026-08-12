@@ -6,7 +6,7 @@ vim.pack.add({
 
 require("notify").setup({
   -- background_colour = "#000000",
-  stages = "static",
+  stages = "fade_in_slide_out",
   timeout = 2500,
   max_width = 45,
   top_down = false,

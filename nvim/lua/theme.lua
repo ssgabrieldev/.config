@@ -240,6 +240,17 @@ M.setup = function()
   hl("BlinkCmpDocBorder", { link = "BlinkCmpMenuBorder" })
   hl("BlinkCmpKind", { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
   hl("BlinkCmpMenuSelection", { link = "Visual" })
+
+  -- Notify
+  hl("NotifyERRORTitle", { fg = M.patterns.error.fg })
+  hl("NotifyERRORBorder", { fg = M.patterns.error.fg })
+  hl("NotifyERRORIcon", { fg = M.patterns.error.fg })
+  hl("NotifyINFOTitle", { fg = M.patterns.info.fg })
+  hl("NotifyINFOBorder", { fg = M.patterns.info.fg })
+  hl("NotifyINFOIcon", { fg = M.patterns.info.fg })
+  hl("NotifyWARNTitle", { fg = M.patterns.warning.fg })
+  hl("NotifyWARNBorder", { fg = M.patterns.warning.fg })
+  hl("NotifyWARNIcon", { fg = M.patterns.warning.fg })
 end
 
 M.lualine = function()
