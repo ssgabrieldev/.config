@@ -214,6 +214,7 @@ M.setup = function()
   M.patterns.dapview_visible = M.patterns.bufferline_selected
   M.patterns.dapview_hidden = vim.tbl_extend("force", M.patterns.normal, { bold = false })
 
+  hl("debugPC", { bg = M.patterns.error.bg })
   hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_02 })
   hl("NvimDapViewTab", M.patterns.dapview_hidden)
   hl("NvimDapViewTabSelected", M.patterns.dapview_visible)
