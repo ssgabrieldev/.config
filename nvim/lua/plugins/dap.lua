@@ -25,7 +25,13 @@ vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", nu
 vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" })
 
 for _, debugger in ipairs(js_debugger) do
-  require("dap").adapters[debugger] = function(cb)
+  require("dap").adapters[debugger] = function(cb, config)
+    -- if config.preLaunchTask then
+    --   vim.fn.system(config.preLaunchTask)
+    --   -- Opcional: Adicionar um pequeno sleep se o container demorar alguns segundos para subir a porta 9229
+    --   -- vim.uv.sleep(2000)
+    -- end
+
     local adap = {
       type = "server",
       host = "localhost",
@@ -51,6 +57,7 @@ require("dap").adapters.firefox = function(cb, config)
     command = "firefox-debug-adapter",
   })
 end
+
 require("dap").listeners.before.attach.dapui_config = function()
   vim.notify("Debugger attatched", "info")
 end

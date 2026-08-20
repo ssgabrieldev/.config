@@ -1,8 +1,4 @@
 local vim = vim
-local copilot_adapter = {
-  name = "copilot",
-  model = "gpt-4.1",
-}
 
 vim.pack.add({
   "https://github.com/zbirenbaum/copilot.lua",
@@ -25,16 +21,41 @@ require("copilot").setup({
 })
 
 require("codecompanion").setup({
+  adapters = {
+    http = {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          schema = {
+            model = {
+              default = "gemini-3.7-flash",
+            },
+          },
+        })
+      end,
+      copilot = function()
+        return require("codecompanion.adapters").extend("gemini", {
+          schema = {
+            model = {
+              default = "gpt-4.1",
+            },
+          },
+        })
+      end
+    }
+  },
   interactions = {
     chat = {
-      adapter = copilot_adapter,
+      adapter = "gemini",
     },
     inline = {
-      adapter = copilot_adapter,
+      adapter = "copilot",
     },
     cmd = {
-      adapter = copilot_adapter,
+      adapter = "copilot",
     }
+  },
+  opts = {
+    log_level = "DEBUG"
   }
 })
 
