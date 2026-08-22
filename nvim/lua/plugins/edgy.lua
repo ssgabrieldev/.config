@@ -6,14 +6,18 @@ vim.pack.add({
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 require("edgy").setup({
-  animate = { enabled = false },
+  animate = {
+    enabled = false,
+  },
   left = {
     { ft = "NvimTree", wo = wo }
   },
   bottom = {
     {
       ft = "toggleterm",
-      wo = wo,
+      wo = vim.tbl_extend("force", wo, {
+        signcolumn = "yes:1"
+      }),
       filter = function(buf, win)
         return vim.api.nvim_win_get_config(win).relative == ""
       end,

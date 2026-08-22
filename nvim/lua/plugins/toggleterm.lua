@@ -13,7 +13,12 @@ require("toggleterm").setup({
   winbar = {
     enabled = true,
     name_formatter = function(term)
-      return term.id .. "<LEADER>tt"
+      local name = term.name
+      local tab_name = (term.display_name or name:match("^(.-);")) .. " [" .. term.id .. "]"
+      local win = vim.api.nvim_get_current_win()
+      local highlight = win == term.window and "%#NvimDapViewTabSelected#" or ""
+
+      return " " .. highlight .. "  " .. tab_name .. " "
     end
   },
   float_opts = {
