@@ -37,9 +37,8 @@ require("codecompanion").setup({
         return require("codecompanion.adapters").extend("copilot", {
           schema = {
             model = {
-              default = "gpt-4o-mini",
-              -- default = "gpt-4.1",
-              -- default = "MAI-Code-1.1-Flash",
+              -- default = "gpt-4o-mini",
+              default = "gpt-4.1",
             },
           },
         })
@@ -67,7 +66,6 @@ vim.api.nvim_create_autocmd("User", {
   callback = function()
     vim.notify("Prompt started", "info", {
       title = "Code Companion",
-      timeout = 500
     })
   end,
 })

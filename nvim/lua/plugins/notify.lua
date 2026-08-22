@@ -22,9 +22,6 @@ require("notify").setup({
 
 vim.notify = require("notify")
 
-vim.keymap.set("n", "<leader>nh", function()
-  vim.cmd("Notifications")
-end, { desc = "Close notifications", silent = true })
 vim.keymap.set("n", "<leader>nc", function()
   require("notify").dismiss()
 end, { desc = "Close notifications", silent = true })
