@@ -85,7 +85,7 @@ keymap_set({ "n" }, "<leader>PU", function()
 end, { silent = true, desc = "Write buffer" })
 
 -- RESTART
-vim.keymap.set('n', '<leader>R', function()
+vim.keymap.set('n', '<leader>RS', function()
   local session = vim.fn.stdpath('state') .. '/restart_session.vim'
   vim.cmd('mksession! ' .. vim.fn.fnameescape(session))
   vim.cmd('restart source ' .. vim.fn.fnameescape(session))

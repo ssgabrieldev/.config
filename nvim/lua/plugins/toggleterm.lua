@@ -1,5 +1,6 @@
 local vim = vim
 local lazygit = nil
+local vimongo = nil
 
 vim.pack.add({
   "https://github.com/akinsho/toggleterm.nvim",
@@ -44,11 +45,26 @@ vim.keymap.set({ "n", "t" }, "<leader>tg", function()
     lazygit = Terminal:new({
       cmd = "lg",
       hidden = true,
-      display_name = "LazyGit",
+      display_name = "Lazy Git",
       direction = "float",
       close_on_exit = true
     })
   end
 
   lazygit:toggle()
-end, { desc = "Toggle float terminals", silent = true })
+end, { desc = "Toggle Lazy Git", silent = true })
+vim.keymap.set({ "n", "t" }, "<leader>tv", function()
+  local Terminal = require('toggleterm.terminal').Terminal
+
+  if vimongo == nil then
+    vimongo = Terminal:new({
+      cmd = "vmd",
+      hidden = true,
+      display_name = "Vi Mongo",
+      direction = "float",
+      close_on_exit = true
+    })
+  end
+
+  vimongo:toggle()
+end, { desc = "Toggle Vi Mongo", silent = true })
