@@ -14,11 +14,11 @@ require("edgy").setup({
   },
   bottom = {
     {
-      ft = "toggleterm",
+      ft = "term-nvim",
       wo = vim.tbl_extend("force", wo, {
-        signcolumn = "yes:1"
+        winfixbuf = false
       }),
-      filter = function(buf, win)
+      filter = function(_, win)
         return vim.api.nvim_win_get_config(win).relative == ""
       end,
     },
