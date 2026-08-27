@@ -60,7 +60,7 @@ vim.o.confirm = true
 require("keymaps")
 
 -- PLUGINS
-require("plugins.toggleterm")
+require("plugins.term")
 require("plugins.nvim-tree")
 require("plugins.bufferline")
 require("plugins.telescope")

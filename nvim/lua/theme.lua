@@ -210,6 +210,10 @@ M.setup = function()
     end
   end
 
+  -- TERM NVIM
+  hl("TermTabActive", M.patterns.bufferline_selected)
+  hl("TermTabInactive", M.patterns.bufferline_hidden)
+
   -- DAP VIEW
   M.patterns.dapview_visible = M.patterns.bufferline_selected
   M.patterns.dapview_hidden = vim.tbl_extend("force", M.patterns.normal, { bold = false })
