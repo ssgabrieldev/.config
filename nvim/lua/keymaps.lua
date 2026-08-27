@@ -81,7 +81,7 @@ keymap_set({ "n" }, "<leader>so", "<cmd>source %<cr>", { silent = true, desc = "
 
 -- PACK
 keymap_set({ "n" }, "<leader>PU", function()
-  vim.pack.update(nil, { force = true })
+  vim.pack.update(nil, { force = false })
 end, { silent = true, desc = "Update plugins" })
 
 -- RESTART
