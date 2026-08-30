@@ -211,13 +211,20 @@ M.setup = function()
   end
 
   -- TERM NVIM
-  M.patterns.term_tab_active = M.patterns.bufferline_selected
-  M.patterns.term_tab_inactive = M.patterns.bufferline_hidden
+  local term_tab_separactor_color = M.patterns.normal.bg
   M.patterns.term_tab_fill = M.patterns.bufferline_hidden
+  M.patterns.term_tab_fill_separator = { bg = M.patterns.term_tab_fill.bg, fg = term_tab_separactor_color }
+  M.patterns.term_tab_active = M.patterns.bufferline_selected
+  M.patterns.term_tab_active_separator = { bg = M.patterns.term_tab_active.bg, fg = term_tab_separactor_color }
+  M.patterns.term_tab_inactive = M.patterns.bufferline_hidden
+  M.patterns.term_tab_inactive_separator = { bg = M.patterns.term_tab_inactive.bg, fg = term_tab_separactor_color }
 
   hl("TermTabActive", M.patterns.term_tab_active)
+  hl("TermTabActiveSeparator", M.patterns.term_tab_active_separator)
   hl("TermTabInactive", M.patterns.term_tab_inactive)
+  hl("TermTabInactiveSeparator", M.patterns.term_tab_inactive_separator)
   hl("TermTabFill", M.patterns.term_tab_fill)
+  hl("TermTabFillSeparator", M.patterns.term_tab_fill_separator)
 
   -- DAP VIEW
   M.patterns.dapview_visible = M.patterns.bufferline_selected
