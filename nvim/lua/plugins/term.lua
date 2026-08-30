@@ -12,9 +12,15 @@ term.setup()
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()
   term.toggle({ id = vim.v.count })
 end, { desc = "Toggle terminals", silent = true })
+
 vim.keymap.set({ "n", "t" }, "<leader>to", function()
   term.open({ id = vim.v.count })
 end, { desc = "Open terminal", silent = true })
+
+vim.keymap.set({ "n", "t" }, "<leader>tc", function()
+  term.close({ id = vim.v.count })
+end, { desc = "Close terminal", silent = true })
+
 vim.keymap.set({ "n", "t" }, "<leader>tg", function()
   if not lazygit then
     lazygit = term.new({
@@ -31,7 +37,4 @@ vim.keymap.set({ "n", "t" }, "<leader>tg", function()
   if lazygit:is_open() then
     vim.cmd("startinsert")
   end
-end, { desc = "Open terminal", silent = true })
-vim.keymap.set({ "n", "t" }, "<leader>tc", function()
-  term.close({ id = vim.v.count })
-end, { desc = "Close terminal", silent = true })
+end, { desc = "Lazy Git", silent = true })

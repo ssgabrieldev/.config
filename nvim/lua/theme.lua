@@ -122,7 +122,7 @@ M.setup = function()
 
   -- WINDOW DECORATION
   hl("StatusLineNC", M.patterns.status_line)
-  hl("FloatBorder", M.patterns.normal)
+  hl("FloatBorder", M.patterns.border)
   hl("WinSeparator", M.patterns.border)
   hl("WinBarActive", M.patterns.normal)
   hl("WinBarInactive", M.patterns.normal)
@@ -132,7 +132,7 @@ M.setup = function()
   -- TELESCOPE
   hl("TelescopeNormal", { link = "NormalFloat" })
   hl("TelescopeBorder", { link = "FloatBorder" })
-  hl("TelescopeTitle", { link = "FloatBorder" })
+  hl("TelescopeTitle", { link = "NormalFloat" })
 
   -- NVIMTREE
   M.patterns.nvimtree_normal = { bg = M.colors.black_01 }
@@ -141,7 +141,7 @@ M.setup = function()
   hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })
 
   -- BUFFERLINE
-  M.patterns.bufferline_hidden = M.patterns.normal
+  M.patterns.bufferline_hidden = M.patterns.status_line
 
   hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
   hl("BufferLineBackground", M.patterns.bufferline_hidden)
@@ -156,7 +156,7 @@ M.setup = function()
   hl("BufferLineCloseButton", { link = "BufferLineBackground" })
   hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
 
-  M.patterns.bufferline_visible = M.patterns.normal
+  M.patterns.bufferline_visible = { bg = M.colors.black_03, fg = M.colors.gray_02 }
 
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
   hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
@@ -211,8 +211,13 @@ M.setup = function()
   end
 
   -- TERM NVIM
-  hl("TermTabActive", M.patterns.bufferline_selected)
-  hl("TermTabInactive", M.patterns.bufferline_hidden)
+  M.patterns.term_tab_active = M.patterns.bufferline_selected
+  M.patterns.term_tab_inactive = M.patterns.bufferline_hidden
+  M.patterns.term_tab_fill = M.patterns.bufferline_hidden
+
+  hl("TermTabActive", M.patterns.term_tab_active)
+  hl("TermTabInactive", M.patterns.term_tab_inactive)
+  hl("TermTabFill", M.patterns.term_tab_fill)
 
   -- DAP VIEW
   M.patterns.dapview_visible = M.patterns.bufferline_selected
