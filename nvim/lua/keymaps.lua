@@ -26,6 +26,7 @@ keymap_set({ "n", "t" }, "<leader>wh", "<cmd>wincmd h<cr>", { silent = true, des
 keymap_set({ "n", "t" }, "<leader>wj", "<cmd>wincmd j<cr>", { silent = true, desc = "Go down" })
 keymap_set({ "n", "t" }, "<leader>wk", "<cmd>wincmd k<cr>", { silent = true, desc = "Go up" })
 keymap_set({ "n", "t" }, "<leader>wl", "<cmd>wincmd l<cr>", { silent = true, desc = "Go right" })
+keymap_set({ "n", "t" }, "<leader>wb", "<cmd>wincmd b<cr>", { silent = true, desc = "Go right" })
 
 -- Clipboard
 keymap_set({ "v" }, "<leader>y", "\"+y", { silent = true, desc = "Yank to clipboard" })
