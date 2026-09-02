@@ -4,10 +4,10 @@ local vim = vim
 
 local M = {
   colors = {
-    black_00  = "#050505", -- 0 em decimal
-    black_01  = "#151515", -- 10 em decimal
-    black_02  = "#252525", -- 20 em decimal
-    black_03  = "#353535", -- 30 em decimal
+    black_00  = "#050505",
+    black_01  = "#151515",
+    black_02  = "#252525",
+    black_03  = "#353535",
     red_00    = "#660708",
     red_02    = "#ba181b",
     gray_00   = "#495057",
