@@ -4,26 +4,16 @@ local vim = vim
 
 local M = {
   colors = {
-    black_00  = "#000000",
-    black_01  = "#050505",
-    black_02  = "#101010",
-    black_03  = "#1f1f1f",
-    red_00    = "#660708",
-    red_02    = "#ba181b",
-    gray_00   = "#495057",
-    gray_02   = "#adb5bd",
-    yellow_00 = "#c36f09",
-    yellow_02 = "#f4e409",
-    blue_00   = "#023e8a",
-    blue_02   = "#0096c7",
-    green_00  = "#006400",
-    green_02  = "#008000"
+    black_00  = "#000000", black_01  = "#050505", black_02  = "#101010", black_03  = "#1f1f1f",
+    red_00    = "#660708", red_02    = "#ba181b", gray_00   = "#495057", gray_02   = "#adb5bd",
+    yellow_00 = "#c36f09", yellow_02 = "#f4e409", blue_00   = "#023e8a", blue_02   = "#0096c7",
+    green_00  = "#006400", green_02  = "#008000"
   }
 }
 
 M.patterns = {}
 M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
-M.patterns.border = { bg = M.colors.black_01, fg = M.colors.black_03, bold = true }
+M.patterns.border = { bg = M.colors.black_01, fg = M.colors.black_03, bold = false }
 M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_02 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
