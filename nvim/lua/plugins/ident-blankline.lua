@@ -6,6 +6,6 @@ vim.pack.add({
 
 require("ibl").setup({
   indent = {
-    char = "|"
+    char = "▏"
   }
 })
