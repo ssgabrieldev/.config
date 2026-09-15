@@ -23,8 +23,8 @@ local M = {
 
 M.patterns = {}
 M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
-M.patterns.border = { bg = M.colors.black_01, fg = M.colors.black_00, bold = false }
-M.patterns.status_line = { bg = M.colors.black_02, fg = M.colors.gray_02 }
+M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00, bold = false }
+M.patterns.status_line = { bg = M.colors.black_00, fg = M.colors.gray_02 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
 M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
 M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
