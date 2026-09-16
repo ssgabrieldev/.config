@@ -8,8 +8,8 @@ local M = {
     black_01 = "#050505",
     black_02 = "#101010",
     black_03 = "#1f1f1f",
-    red_00 = "#660708",
-    red_02 = "#ba181b",
+    red_00 = "#330304",
+    red_01 = "#ba181b",
     gray_00 = "#495057",
     gray_02 = "#adb5bd",
     yellow_00 = "#c36f09",
@@ -26,7 +26,7 @@ M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00, bold = false }
 M.patterns.status_line = { bg = M.colors.black_00, fg = M.colors.gray_02 }
 M.patterns.ok = { bg = M.colors.green_00, fg = M.colors.green_02 }
-M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_02 }
+M.patterns.error = { bg = M.colors.red_00, fg = M.colors.red_01 }
 M.patterns.warning = { bg = M.colors.yellow_00, fg = M.colors.yellow_02 }
 M.patterns.info = { bg = M.colors.blue_00, fg = M.colors.blue_02 }
 
@@ -56,7 +56,7 @@ M.setup = function()
   hl("Changed", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("Search", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
   hl("Delimiter", { fg = M.colors.gray_02 })
-  hl("Keyword", { fg = M.colors.red_02 })
+  hl("Keyword", { fg = M.colors.red_01 })
 
   -- WINDOW CONTENT
   hl("CursorLine", { bg = M.patterns.normal.bg })
@@ -147,9 +147,9 @@ M.setup = function()
 
   hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
   hl("BufferLineBackground", M.patterns.bufferline_hidden)
-  hl("BufferLinePick", vim.tbl_extend("force", M.patterns.bufferline_hidden, { fg = M.colors.red_02, bold = true }))
+  hl("BufferLinePick", vim.tbl_extend("force", M.patterns.bufferline_hidden, { fg = M.colors.red_01, bold = true }))
   hl("BufferLineHint", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
-  hl("BufferLineError", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.red_02 })
+  hl("BufferLineError", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.red_01 })
   hl("BufferLineWarning", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.yellow_02 })
   hl("BufferLineInfo", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
   hl("BufferLineDuplicate", { link = "BufferLineBackground" })
@@ -161,9 +161,9 @@ M.setup = function()
   M.patterns.bufferline_visible = { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.gray_02 }
 
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
-  hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
+  hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_01 })
   hl("BufferLineHintVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
-  hl("BufferLineErrorVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_02 })
+  hl("BufferLineErrorVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_01 })
   hl("BufferLineWarningVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.yellow_02 })
   hl("BufferLineInfoVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
   hl("BufferLineDuplicateVisible", { link = "BufferLineBufferVisible" })
@@ -174,9 +174,9 @@ M.setup = function()
   M.patterns.bufferline_selected = { bg = M.patterns.bufferline_visible.bg, bold = true, underline = true }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
-  hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
+  hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
   hl("BufferLineHintSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
-  hl("BufferLineErrorSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_02 }))
+  hl("BufferLineErrorSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
   hl("BufferLineWarningSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.yellow_02 }))
   hl("BufferLineInfoSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
   hl("BufferLineDuplicateSelected", { link = "BufferLineBufferSelected" })
@@ -233,7 +233,7 @@ M.setup = function()
   M.patterns.dapview_hidden = vim.tbl_extend("force", M.patterns.normal, { bold = false })
 
   hl("debugPC", { bg = M.patterns.error.bg })
-  hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_02 })
+  hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_01 })
   hl("NvimDapViewTab", M.patterns.dapview_hidden)
   hl("NvimDapViewTabSelected", M.patterns.dapview_visible)
   hl("NvimDapViewTabFill", { link = "NvimDapViewTab" })
@@ -244,7 +244,7 @@ M.setup = function()
   -- MARKVIEW
   hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_02, bold = true })
   for i = 1, 5 do
-    hl("MarkviewHeading" .. i, { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
+    hl("MarkviewHeading" .. i, { bg = M.patterns.normal.bg, fg = M.colors.red_01 })
   end
 
   -- EDGY
@@ -257,7 +257,7 @@ M.setup = function()
   hl("BlinkCmpMenuBorder", { link = "FloatBorder" })
   hl("BlinkCmpDoc", { link = "BlinkCmpMenu" })
   hl("BlinkCmpDocBorder", { link = "BlinkCmpMenuBorder" })
-  hl("BlinkCmpKind", { bg = M.patterns.normal.bg, fg = M.colors.red_02 })
+  hl("BlinkCmpKind", { bg = M.patterns.normal.bg, fg = M.colors.red_01 })
   hl("BlinkCmpMenuSelection", { link = "Visual" })
 
   -- Notify
