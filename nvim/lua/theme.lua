@@ -143,35 +143,35 @@ M.setup = function()
   hl("NvimTreeIndentMarker", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.normal.fg })
 
   -- BUFFERLINE
-  M.patterns.bufferline_hidden = { bg = M.patterns.normal.bg }
+  M.patterns.bufferline_hidden = { bg = M.patterns.normal.bg, fg = M.colors.gray_00 }
 
   hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
   hl("BufferLineBackground", M.patterns.bufferline_hidden)
   hl("BufferLinePick", vim.tbl_extend("force", M.patterns.bufferline_hidden, { fg = M.colors.red_01, bold = true }))
-  hl("BufferLineHint", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
-  hl("BufferLineError", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.red_01 })
-  hl("BufferLineWarning", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.yellow_02 })
-  hl("BufferLineInfo", { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.blue_02 })
+  hl("BufferLineHint", M.patterns.bufferline_hidden)
+  hl("BufferLineError", M.patterns.bufferline_hidden)
+  hl("BufferLineWarning", M.patterns.bufferline_hidden)
+  hl("BufferLineInfo", M.patterns.bufferline_hidden)
   hl("BufferLineDuplicate", { link = "BufferLineBackground" })
   hl("BufferLineFill", { link = "BufferLineBackground" })
   hl("BufferLineModified", { link = "BufferLineBackground" })
   hl("BufferLineCloseButton", { link = "BufferLineBackground" })
   hl("BufferLineDevIconDefault", { link = "BufferLineBackground" })
 
-  M.patterns.bufferline_visible = { bg = M.patterns.bufferline_hidden.bg, fg = M.colors.gray_02 }
+  M.patterns.bufferline_visible = M.patterns.bufferline_hidden
 
   hl("BufferLineBufferVisible", M.patterns.bufferline_visible)
   hl("BufferLinePickVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_01 })
-  hl("BufferLineHintVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
-  hl("BufferLineErrorVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.red_01 })
-  hl("BufferLineWarningVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.yellow_02 })
-  hl("BufferLineInfoVisible", { bg = M.patterns.bufferline_visible.bg, fg = M.colors.blue_02 })
+  hl("BufferLineHintVisible", M.patterns.bufferline_visible)
+  hl("BufferLineErrorVisible", M.patterns.bufferline_visible)
+  hl("BufferLineWarningVisible", M.patterns.bufferline_visible)
+  hl("BufferLineInfoVisible", M.patterns.bufferline_visible)
   hl("BufferLineDuplicateVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineIndicatorVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = { bg = M.patterns.bufferline_visible.bg, bold = true, underline = true }
+  M.patterns.bufferline_selected = { bg = M.patterns.bufferline_visible.bg, bold = true, underline = false }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
@@ -230,7 +230,7 @@ M.setup = function()
 
   -- DAP VIEW
   M.patterns.dapview_visible = M.patterns.bufferline_selected
-  M.patterns.dapview_hidden = vim.tbl_extend("force", M.patterns.normal, { bold = false })
+  M.patterns.dapview_hidden = M.patterns.bufferline_hidden
 
   hl("debugPC", { bg = M.patterns.error.bg })
   hl("NvimDapViewControlPause", { bg = M.patterns.dapview_hidden.bg, fg = M.colors.red_01 })
