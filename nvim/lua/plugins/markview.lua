@@ -6,17 +6,18 @@ vim.pack.add({
 
 require("markview").setup({
   preview = {
-    filetypes = { "markdown", "codecompanion" },
+    enable_hybrid_mode = true,
     condition = function(buffer)
       local ft, bt = vim.bo[buffer].ft, vim.bo[buffer].bt;
+      local filetypes = { "markdown", "codecompanion" }
 
-      if bt == "nofile" and ft == "codecompanion" then
+      if vim.tbl_contains(filetypes, ft) then
         return true;
-      elseif bt == "nofile" then
+      elseif bt == "nofile" and ft == "codecompanion"  then
         return false;
-      else
-        return true;
       end
+
+      return false
     end
   },
   markdown = {
