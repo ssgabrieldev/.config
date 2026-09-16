@@ -139,6 +139,8 @@ M.setup = function()
 
   hl("NvimTreeNormal", M.patterns.nvimtree_normal)
   hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })
+  hl("NvimTreeFolderIcon", { bg = M.patterns.nvimtree_normal.bg, fg = M.colors.blue_02 })
+  hl("NvimTreeIndentMarker", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.normal.fg })
 
   -- BUFFERLINE
   M.patterns.bufferline_hidden = { bg = M.patterns.normal.bg }

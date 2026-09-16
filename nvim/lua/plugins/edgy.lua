@@ -1,5 +1,5 @@
 local vim = vim
-local wo = { winfixbuf = true, winbar = false, winhighlight = "", signcolumn = "no" }
+local wo = { winfixbuf = true, winbar = false, winhighlight = "", signcolumn = "no", sidescrolloff = 0 }
 
 vim.pack.add({
   "https://github.com/folke/edgy.nvim",
@@ -50,7 +50,7 @@ require("edgy").setup({
       size = function()
         local f = (40 * vim.o.lines) / 100
         local i, _ = math.modf(f)
-        local min = 16
+        local min = 15
 
         if i < min then
           return min
@@ -85,6 +85,7 @@ require("edgy").setup({
       win:resize("height", 2)
     end,
     ["<a-j>"] = function(win)
+      print(vim.inspect(win))
       win:resize("height", -2)
     end,
   }
