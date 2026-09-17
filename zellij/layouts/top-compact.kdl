@@ -1,0 +1,21 @@
+layout {
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm" {
+        format_left                "{mode}"
+        format_center              "{tabs}"
+        format_right               "{datetime}"
+        format_space               "#[bg=#000000]"
+        hide_frame_for_single_pane "false"
+        mode_normal                "#[bg=#000000,fg=#ba181b,bold] NORMAL "
+        mode_locked                "#[bg=#000000,fg=#0096c7,bold] LOCKED "
+        tab_normal                 "#[bg=#000000,fg=#495057] {name} "
+        tab_active                 "#[bg=#000000,fg=#adb5bd,bold] {name} "
+        datetime                   "#[bg=#000000,fg=#adb5bd,bold] {format} "
+        datetime_format            "%A, %d %b %Y %H:%M"
+        datetime_timezone          "America/Sao_Paulo"
+      }
+    }
+    children
+  }
+}
