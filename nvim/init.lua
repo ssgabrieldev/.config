@@ -36,6 +36,7 @@ vim.opt.splitkeep = "screen"
 vim.opt.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.cmdheight = 0
+vim.opt.messagesopt = "wait:0,history:500,progress:c"
 vim.opt.cursorline = true
 vim.opt.tabstop = tab_len
 vim.opt.softtabstop = tab_len
