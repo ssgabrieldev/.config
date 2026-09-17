@@ -7,13 +7,13 @@ vim.pack.add({
 require("bufferline").setup({
   options = {
     mode = "buffers",
-    -- separator_style = { "│", "│" },
+    separator_style = { "", "" },
     indicator = { icon = "▎", style = "none" },
     diagnostics = "nvim_lsp",
     diagnostics_indicator = true,
     color_icons = true,
     offsets = {
-      { filetype = "NvimTree",      text = "", text_align = "center", separator = true, highlight = "NvimTreeNormal" },
+      { filetype = "NvimTree",      text = "NvimTree", text_align = "center", separator = true, highlight = "NvimTreeNormal" },
       { filetype = "codecompanion", text = "", text_align = "center", separator = true, highlight = "NvimTreeNormal" },
     },
   },

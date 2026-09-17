@@ -59,7 +59,7 @@ M.setup = function()
   hl("Keyword", { fg = M.colors.red_01 })
 
   -- WINDOW CONTENT
-  hl("CursorLine", { bg = M.colors.black_02 })
+  hl("CursorLine", { bg = M.colors.black_01 })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
   hl("Visual", { bg = M.colors.black_02 })
