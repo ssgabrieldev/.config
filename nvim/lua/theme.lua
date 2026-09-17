@@ -59,10 +59,10 @@ M.setup = function()
   hl("Keyword", { fg = M.colors.red_01 })
 
   -- WINDOW CONTENT
-  hl("CursorLine", { bg = M.colors.black_03 })
+  hl("CursorLine", { bg = M.colors.black_02 })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
-  hl("Visual", { bg = M.colors.black_03 })
+  hl("Visual", { bg = M.colors.black_02 })
   hl("CursorLineNr", { link = "Keyword" })
   hl("Directory", { link = "Normal" })
 
@@ -145,6 +145,7 @@ M.setup = function()
   -- BUFFERLINE
   M.patterns.bufferline_hidden = { bg = M.patterns.normal.bg, fg = M.colors.gray_00 }
 
+  hl("BufferLineSeparator", { link = "WinSeparator" })
   hl("BufferLineOffsetSeparator", { link = "WinSeparator" })
   hl("BufferLineBackground", M.patterns.bufferline_hidden)
   hl("BufferLinePick", vim.tbl_extend("force", M.patterns.bufferline_hidden, { fg = M.colors.red_01, bold = true }))
@@ -171,7 +172,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = { bg = M.patterns.bufferline_visible.bg, bold = true, underline = false }
+  M.patterns.bufferline_selected = { bg = M.colors.black_02, bold = true, underline = false }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
@@ -213,13 +214,12 @@ M.setup = function()
   end
 
   -- TERM NVIM
-  local term_tab_separactor_color = M.patterns.normal.bg
   M.patterns.term_tab_fill = M.patterns.bufferline_hidden
-  M.patterns.term_tab_fill_separator = { bg = M.patterns.term_tab_fill.bg, fg = term_tab_separactor_color }
+  M.patterns.term_tab_fill_separator = { bg = M.patterns.term_tab_fill.bg, fg = M.patterns.term_tab_fill.bg }
   M.patterns.term_tab_active = M.patterns.bufferline_selected
-  M.patterns.term_tab_active_separator = { bg = M.patterns.term_tab_active.bg, fg = term_tab_separactor_color }
+  M.patterns.term_tab_active_separator = { bg = M.patterns.term_tab_active.bg, fg = M.patterns.term_tab_active.bg }
   M.patterns.term_tab_inactive = M.patterns.bufferline_hidden
-  M.patterns.term_tab_inactive_separator = { bg = M.patterns.term_tab_inactive.bg, fg = term_tab_separactor_color }
+  M.patterns.term_tab_inactive_separator = { bg = M.patterns.term_tab_inactive.bg, fg = M.patterns.term_tab_inactive.bg }
 
   hl("TermTabActive", M.patterns.term_tab_active)
   hl("TermTabActiveSeparator", M.patterns.term_tab_active_separator)
@@ -287,6 +287,11 @@ M.lualine = function()
       c = M.patterns.lualine_normal,
     },
     insert = {
+      a = M.patterns.lualine_insert,
+      b = M.patterns.lualine_insert,
+      c = M.patterns.lualine_insert,
+    },
+    terminal = {
       a = M.patterns.lualine_insert,
       b = M.patterns.lualine_insert,
       c = M.patterns.lualine_insert,

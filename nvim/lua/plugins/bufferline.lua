@@ -7,7 +7,7 @@ vim.pack.add({
 require("bufferline").setup({
   options = {
     mode = "buffers",
-    separator_style = { "", "" },
+    -- separator_style = { "│", "│" },
     indicator = { icon = "▎", style = "none" },
     diagnostics = "nvim_lsp",
     diagnostics_indicator = true,
