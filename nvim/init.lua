@@ -60,11 +60,11 @@ vim.o.confirm = true
 require("keymaps")
 
 -- PLUGINS
+require("theme").setup()
 require("plugins.term")
 require("plugins.nvim-tree")
 require("plugins.bufferline")
 require("plugins.telescope")
-require("plugins.ident-blankline")
 require("plugins.edgy")
 require("plugins.mason")
 require("plugins.treesitter")
@@ -76,4 +76,4 @@ require("plugins.companion")
 require("plugins.git")
 require("plugins.blink")
 require("plugins.minimap")
-require("theme").setup()
+require("plugins.ident-blankline")
