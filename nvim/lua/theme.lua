@@ -172,7 +172,7 @@ M.setup = function()
   hl("BufferLineCloseButtonVisible", { link = "BufferLineBufferVisible" })
   hl("BufferLineModifiedVisible", { link = "BufferLineBufferVisible" })
 
-  M.patterns.bufferline_selected = { bg = M.colors.black_02, bold = true, underline = false }
+  M.patterns.bufferline_selected = { bg = M.patterns.normal.bg, bold = true, underline = false }
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
