@@ -11,7 +11,7 @@ require("toggleterm").setup({
   persist_mode = true,
   shade_terminals = false,
   winbar = {
-    enabled = true,
+    enabled = false,
     name_formatter = function(term)
       local name = term.name
       local tab_name = (term.display_name or name:match("^(.-);")) .. " [" .. term.id .. "]"

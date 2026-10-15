@@ -62,7 +62,7 @@ require("keymaps")
 
 -- PLUGINS
 require("theme").setup()
-require("plugins.term")
+require("plugins.toggleterm")
 require("plugins.nvim-tree")
 require("plugins.bufferline")
 require("plugins.telescope")

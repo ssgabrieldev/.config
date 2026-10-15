@@ -14,7 +14,7 @@ require("edgy").setup({
   },
   bottom = {
     {
-      ft = "term-nvim",
+      ft = "toggleterm",
       wo = vim.tbl_extend("force", wo, {
         winfixbuf = false
       }),
