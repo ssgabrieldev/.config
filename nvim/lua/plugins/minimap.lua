@@ -1,8 +1,8 @@
 local vim = vim
 
 vim.pack.add({
-  { src = "https://github.com/Isrothy/neominimap.nvim" },
-})
+  "https://github.com/Isrothy/neominimap.nvim",
+}, { confirm = vim.g.vim_pack_add_confirm })
 
 vim.g.neominimap = {
   auto_enable = true,

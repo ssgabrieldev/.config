@@ -16,7 +16,7 @@ local lsp_config = { capabilities = vim.lsp.protocol.make_client_capabilities() 
 vim.diagnostic.config({
   float = { border =  vim.g.border_style },
   virtual_lines = false,
-  virtual_text = { prefix = "▍ ", spacing = 0 },
+  virtual_text = { prefix = "󰧞", spacing = 0 },
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = signs.Error,

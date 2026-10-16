@@ -15,9 +15,7 @@ require("edgy").setup({
   bottom = {
     {
       ft = "toggleterm",
-      wo = vim.tbl_extend("force", wo, {
-        winfixbuf = false
-      }),
+      wo = wo,
       filter = function(_, win)
         return vim.api.nvim_win_get_config(win).relative == ""
       end,
