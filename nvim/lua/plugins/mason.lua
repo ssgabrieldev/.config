@@ -37,16 +37,12 @@ vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 end, opts)
 vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.buf.hover({
-    border = vim.g.border_style,
-    max_width = 100,
-    max_height = 35
+    border = vim.g.border_style
   })
 end, opts)
 vim.keymap.set("n", "<leader>le", function()
   vim.diagnostic.open_float({
-    border = vim.g.border_style,
-    max_width = 100,
-    max_height = 35
+    border = vim.g.border_style
   })
 end, opts)
 
