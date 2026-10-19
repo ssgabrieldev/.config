@@ -371,7 +371,7 @@ default_layout "default"
 //   - true (default, enabled)
 //   - false
 // 
-pane_frames false
+pane_frames true
  
 // Set the pane frame style when pane_frames is enabled
 // Options:

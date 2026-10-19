@@ -11,12 +11,13 @@ vim.pack.add({
 }, { confirm = vim.g.vim_pack_add_confirm })
 
 require("gruvbox").setup({
-  transparent_mode = true
+  transparent_mode = transparent
 })
 
 require("github-theme").setup({
   options = {
-    transparent = true
+    transparent = transparent,
+    terminal_colors = false
   }
 })
 
@@ -54,5 +55,5 @@ require("tokyodark").setup({
   gamma = 0.8
 })
 
-vim.cmd("colorscheme github_dark_tritanopia")
+vim.cmd("colorscheme tokyodark")
 -- require("onedark").load()
