@@ -61,7 +61,6 @@ vim.o.confirm = true
 require("keymaps")
 
 -- PLUGINS
--- require("theme").setup()
 require("plugins.theme")
 require("plugins.editor")
 require("plugins.panel")
