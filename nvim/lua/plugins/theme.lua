@@ -11,24 +11,24 @@ local M = {
     red_00 = "#330304",
     red_01 = "#ba181b",
     gray_00 = "#495057",
-    gray_02 = "#adb5bd",
+    gray_01 = "#adb5bd",
     yellow_00 = "#c36f09",
-    yellow_02 = "#f4e409",
+    yellow_01 = "#f4e409",
     blue_00 = "#023e8a",
-    blue_02 = "#0096c7",
+    blue_01 = "#0096c7",
     green_00 = "#006400",
-    green_02 = "#008000"
+    green_01 = "#008000"
   }
 }
 
 M.patterns = {}
-M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_02 }
+M.patterns.normal = { bg = M.colors.black_01, fg = M.colors.gray_01 }
 M.patterns.border = { bg = M.patterns.normal.bg, fg = M.colors.black_00, bold = false }
-M.patterns.status_line = { bg = M.colors.black_00, fg = M.colors.gray_02 }
-M.patterns.ok = { bg = M.patterns.normal.bg, fg = M.colors.green_02 }
+M.patterns.status_line = { bg = M.colors.black_00, fg = M.colors.gray_01 }
+M.patterns.ok = { bg = M.patterns.normal.bg, fg = M.colors.green_01 }
 M.patterns.error = { bg = M.patterns.normal.bg, fg = M.colors.red_01 }
-M.patterns.warning = { bg = M.patterns.normal.bg, fg = M.colors.yellow_02 }
-M.patterns.info = { bg = M.patterns.normal.bg, fg = M.colors.blue_02 }
+M.patterns.warning = { bg = M.patterns.normal.bg, fg = M.colors.yellow_01 }
+M.patterns.info = { bg = M.patterns.normal.bg, fg = M.colors.blue_01 }
 
 local hl = function(group, opts)
   vim.api.nvim_set_hl(0, group, opts)
@@ -57,16 +57,16 @@ M.setup = function()
   hl("Search", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
 
   -- WINDOW CONTENT
-  hl("CursorLine", { bg = M.colors.black_01 })
+  hl("CursorLine", { link = "Visual" })
   hl("EndOfBuffer", { bg = M.patterns.normal.bg, fg = M.patterns.normal.bg })
   hl("NormalFloat", M.patterns.normal)
   hl("Visual", { bg = M.colors.black_03 })
-  hl("CursorLineNr", { link = "Keyword" })
+  hl("CursorLineNr", { link = "CursorLine" })
   hl("Directory", { link = "Normal" })
 
   -- SYNTAX
-  hl("Delimiter", { fg = M.colors.gray_02 })
   hl("Keyword", { fg = M.colors.red_01 })
+  hl("Delimiter", { fg = M.colors.gray_01 })
   hl("String", { link = "Keyword" })
   hl("Function", { link = "Keyword" })
   hl("Statement", { link = "Keyword" })
@@ -107,7 +107,7 @@ M.setup = function()
   hl("typescriptParens", { link = "Delimiter" })
 
   -- TREESITTER
-  hl("@variable", { fg = M.colors.gray_02 })
+  hl("@variable", { fg = M.colors.gray_01 })
   hl("@keyword", { link = "Keyword" })
   hl("@string", { fg = M.colors.yellow_00 })
   hl("@variable.parameter", { link = "Delimiter" })
@@ -117,7 +117,7 @@ M.setup = function()
   hl("@method", { link = "Keyword" })
   hl("@number", { link = "Number" })
   hl("@boolean", { link = "Boolean" })
-  hl("@lsp.type.property", { fg = M.colors.gray_02 })
+  hl("@lsp.type.property", { fg = M.colors.gray_01 })
   hl("@markup.raw.block.markdown", { bold = true })
 
   -- WINDOW DECORATION
@@ -139,7 +139,7 @@ M.setup = function()
 
   hl("NvimTreeNormal", M.patterns.nvimtree_normal)
   hl("NvimTreeEndOfBuffer", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.nvimtree_normal.bg })
-  hl("NvimTreeFolderIcon", { bg = M.patterns.nvimtree_normal.bg, fg = M.colors.blue_02 })
+  hl("NvimTreeFolderIcon", { bg = M.patterns.nvimtree_normal.bg, fg = M.colors.blue_01 })
   hl("NvimTreeIndentMarker", { bg = M.patterns.nvimtree_normal.bg, fg = M.patterns.normal.fg })
 
   -- BUFFERLINE
@@ -176,10 +176,10 @@ M.setup = function()
 
   hl("BufferLineBufferSelected", M.patterns.bufferline_selected)
   hl("BufferLinePickSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
-  hl("BufferLineHintSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
+  hl("BufferLineHintSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_01 }))
   hl("BufferLineErrorSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.red_01 }))
-  hl("BufferLineWarningSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.yellow_02 }))
-  hl("BufferLineInfoSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_02 }))
+  hl("BufferLineWarningSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.yellow_01 }))
+  hl("BufferLineInfoSelected", vim.tbl_extend("force", M.patterns.bufferline_selected, { fg = M.colors.blue_01 }))
   hl("BufferLineDuplicateSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineModifiedSelected", { link = "BufferLineBufferSelected" })
   hl("BufferLineIndicatorSelected", { link = "BufferLineBufferSelected" })
@@ -237,7 +237,7 @@ M.setup = function()
   hl("NvimDapViewControlRunLast", { link = "NvimDapViewControlPause" })
 
   -- MARKVIEW
-  hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_02, bold = true })
+  hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_01, bold = true })
   for i = 1, 5 do
     hl("MarkviewHeading" .. i, { bg = M.patterns.normal.bg, fg = M.colors.red_01 })
   end
