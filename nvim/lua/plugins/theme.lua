@@ -107,7 +107,7 @@ M.setup = function()
   hl("typescriptParens", { link = "Delimiter" })
 
   -- TREESITTER
-  hl("@variable", { fg = M.colors.gray_01 })
+  hl("@variable", { link = "Delimiter" })
   hl("@keyword", { link = "Keyword" })
   hl("@string", { link = "String" })
   hl("@variable.parameter", { link = "Delimiter" })
