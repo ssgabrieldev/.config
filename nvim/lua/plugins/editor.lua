@@ -120,21 +120,25 @@ require("markview").setup({
   markdown = {
     headings = {
       shift_width = 0,
-      sign = false,
       heading_1 = {
         sign = "",
+        hl = "MarkviewHeading1"
       },
       heading_2 = {
         sign = "",
+        hl = "MarkviewHeading2"
       },
       heading_3 = {
         sign = "",
+        hl = "MarkviewHeading3"
       },
       heading_4 = {
         sign = "",
+        hl = "MarkviewHeading4"
       },
       heading_5 = {
         sign = "",
+        hl = "MarkviewHeading5"
       }
     },
     code_blocks = {
@@ -143,6 +147,9 @@ require("markview").setup({
       sign = false,
       style = "simple",
       label_direction = "right"
+    },
+    list_items = {
+      shift_width = 0
     }
   }
 })

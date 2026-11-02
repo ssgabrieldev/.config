@@ -46,7 +46,7 @@ M.setup = function()
   hl("Normal", M.patterns.normal)
   hl("Comment", { fg = M.colors.gray_00 })
   hl("StatusLine", M.patterns.status_line)
-  hl("MsgArea", M.patterns.status_line)
+  -- hl("MsgArea", M.patterns.status_line)
   hl("DiagnosticInfo", vim.tbl_extend('force', M.patterns.info, { bg = 'NONE' }))
   hl("DiagnosticWarn", vim.tbl_extend('force', M.patterns.warning, { bg = 'NONE' }))
   hl("DiagnosticError", vim.tbl_extend('force', M.patterns.error, { bg = 'NONE' }))
@@ -239,7 +239,7 @@ M.setup = function()
   -- MARKVIEW
   hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_01, bold = true })
   for i = 1, 5 do
-    hl("MarkviewHeading" .. i, { bg = M.patterns.normal.bg, fg = M.colors.red_01 })
+    hl("MarkviewHeading" .. i, { bg = M.colors.black_02, fg = M.colors.red_01 })
   end
 
   -- EDGY
