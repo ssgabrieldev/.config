@@ -103,19 +103,20 @@ vim.pack.add({
 
 require("markview").setup({
   preview = {
-    enable_hybrid_mode = true,
-    condition = function(buffer)
-      local ft, bt = vim.bo[buffer].ft, vim.bo[buffer].bt;
-      local filetypes = { "markdown", "codecompanion" }
+    hybrid_modes = { "i", "n" },
+    linewise_hybrid_mode = true,
+    -- condition = function(buffer)
+    --   local ft, bt = vim.bo[buffer].ft, vim.bo[buffer].bt;
+    --   local filetypes = { "markdown", "codecompanion" }
 
-      if vim.tbl_contains(filetypes, ft) then
-        return true;
-      elseif bt == "nofile" and ft == "codecompanion" then
-        return false;
-      end
+    --   if vim.tbl_contains(filetypes, ft) then
+    --     return true;
+    --   elseif bt == "nofile" and ft == "codecompanion" then
+    --     return false;
+    --   end
 
-      return false
-    end
+    --   return false
+    -- end
   },
   markdown = {
     headings = {
@@ -198,12 +199,12 @@ vim.pack.add({
 require("mason").setup({ ui = { border = vim.g.border_style } })
 require("mason-lspconfig").setup({ automatic_enable = true })
 
-local signs = { Error = "", Warn  = "", Hint  = "󰌶", Info  = "󰋽" }
+local signs = { Error = "", Warn = "", Hint = "󰌶", Info = "󰋽" }
 local opts = { noremap = true, silent = true }
 local lsp_config = { capabilities = vim.lsp.protocol.make_client_capabilities() }
 
 vim.diagnostic.config({
-  float = { border =  vim.g.border_style },
+  float = { border = vim.g.border_style },
   virtual_lines = false,
   virtual_text = { prefix = "󰧞", spacing = 0 },
   signs = {
