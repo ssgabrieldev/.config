@@ -105,6 +105,8 @@ require("markview").setup({
   preview = {
     hybrid_modes = { "i", "n" },
     linewise_hybrid_mode = true,
+    filetypes = { "codecompanion", "markdown" },
+    ignore_buftypes = { "nofile" },
     -- condition = function(buffer)
     --   local ft, bt = vim.bo[buffer].ft, vim.bo[buffer].bt;
     --   local filetypes = { "markdown", "codecompanion" }
@@ -227,11 +229,15 @@ vim.keymap.set({ "n", "v" }, "<leader>lf", function()
 end, opts)
 vim.keymap.set("n", "<leader>lh", function()
   vim.lsp.buf.hover({
-    border = vim.g.border_style
+    border = vim.g.border_style,
+    max_height = 25,
+    max_width = 60
   })
 end, opts)
 vim.keymap.set("n", "<leader>le", function()
   vim.diagnostic.open_float({
-    border = vim.g.border_style
+    border = vim.g.border_style,
+    max_height = 25,
+    max_width = 60
   })
 end, opts)
