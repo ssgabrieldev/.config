@@ -239,7 +239,7 @@ M.setup = function()
   -- MARKVIEW
   hl("MarkViewCode", { bg = M.colors.black_02, fg = M.colors.gray_01, bold = true })
   for i = 1, 5 do
-    hl("MarkviewHeading" .. i, { bg = M.colors.black_02, fg = M.colors.red_01 })
+    hl("MarkviewHeading" .. i, { bg = (i == 1 and M.colors.black_02 or M.patterns.normal.bg), fg = M.colors.red_01 })
   end
 
   -- EDGY
