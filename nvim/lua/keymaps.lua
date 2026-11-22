@@ -40,12 +40,12 @@ keymap_set({ "v" }, "<leader>sc", "c`<C-R>\"`<esc>", { silent = true, desc = "Su
 keymap_set({ "v" }, "<leader>sQ", "c'<C-R>\"'<esc>", { silent = true, desc = "Sunround by single quotes" })
 keymap_set({ "v" }, "<leader>sq", "c\"<C-R>\"\"<esc>", { silent = true, desc = "Sunround by quotes" })
 -- SUNROUND: remove
-keymap_set({ "n" }, "<leader>sb", "di[vhp", { silent = true, desc = "Remove brackets" })
-keymap_set({ "n" }, "<leader>sp", "di(vhp", { silent = true, desc = "Remove parentheses" })
-keymap_set({ "n" }, "<leader>sk", "di{vhp", { silent = true, desc = "Remove keys" })
-keymap_set({ "n" }, "<leader>sc", "di`vhp", { silent = true, desc = "Remove crasis" })
-keymap_set({ "n" }, "<leader>sQ", "di'vhp", { silent = true, desc = "Remove single quotes" })
-keymap_set({ "n" }, "<leader>sq", "di\"vhp", { silent = true, desc = "Remove quotes" })
+keymap_set({ "n" }, "<leader>sb", "di[va[p", { silent = true, desc = "Remove brackets" })
+keymap_set({ "n" }, "<leader>sp", "di(va(p", { silent = true, desc = "Remove parentheses" })
+keymap_set({ "n" }, "<leader>sk", "di{va{p", { silent = true, desc = "Remove keys" })
+keymap_set({ "n" }, "<leader>sc", "di`va`p", { silent = true, desc = "Remove crasis" })
+keymap_set({ "n" }, "<leader>sQ", "di'va'p", { silent = true, desc = "Remove single quotes" })
+keymap_set({ "n" }, "<leader>sq", "di\"va\"p", { silent = true, desc = "Remove quotes" })
 -- SUNROUND: delete inside
 keymap_set({ "n" }, "<leader>diq", "di\"", { silent = true, desc = "Delete inside quotes" })
 keymap_set({ "n" }, "<leader>diQ", "di'", { silent = true, desc = "Delete inside single quotes" })

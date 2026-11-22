@@ -261,7 +261,7 @@ vim.pack.add({
 
 require("lualine").setup({
   options = {
-    theme = require("plugins.theme").lualine(),
+    -- theme = require("plugins.theme").lualine(),
     globalstatus = true,
     component_separators = { left = "", right = "" },
     section_separators = { left = "", right = "" },
