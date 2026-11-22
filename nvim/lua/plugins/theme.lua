@@ -1,8 +1,14 @@
-vim.pack.add({
-  "https://github.com/ellisonleao/gruvbox.nvim"
+vim.pack.add({ 'projekt0n/github-nvim-theme' })
+
+require('github-theme').setup({
+  options = {
+    transparent = true,
+  },
+  groups = {
+    all = {
+      CursorLine = { link = "Normal" }
+    }
+  }
 })
 
-require("gruvbox").setup({
-  transparent_mode = false
-})
-vim.cmd.colorscheme("gruvbox")
+vim.cmd('colorscheme github_dark_default')
