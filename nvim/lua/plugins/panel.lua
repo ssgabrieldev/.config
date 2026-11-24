@@ -2,7 +2,7 @@ local vim = vim
 local border_style = vim.g.border_style
 
 -- LAYOUT
-local wo = { winfixbuf = true, winbar = false, winhighlight = "", signcolumn = "no", sidescrolloff = 0 }
+local wo = { winfixbuf = nil, winbar = false, winhighlight = "", signcolumn = "no", sidescrolloff = 0 }
 
 vim.pack.add({
   "https://github.com/folke/edgy.nvim",
@@ -17,7 +17,7 @@ require("edgy").setup({
   },
   bottom = {
     {
-      ft = "toggleterm",
+      ft = "term-nvim",
       wo = wo,
       filter = function(_, win)
         return vim.api.nvim_win_get_config(win).relative == ""
@@ -86,7 +86,6 @@ require("edgy").setup({
       win:resize("height", 2)
     end,
     ["<a-j>"] = function(win)
-      print(vim.inspect(win))
       win:resize("height", -2)
     end,
   }
@@ -148,111 +147,119 @@ vim.keymap.set("n", "<leader>nc", function()
 end, { desc = "Close notifications", silent = true })
 
 -- TERMINAL
-
-local lazygit = nil
-local vimongo = nil
-
--- vim.pack.add({
---   "https://github.com/ssgabrieldev/term.nvim",
--- }, { confirm = vim.g.vim_pack_add_force })
--- 
--- local term = require("term")
--- 
--- term.setup()
--- 
--- vim.keymap.set({ "n", "t" }, "<leader>tt", function()
---   term.toggle({ id = vim.v.count })
--- end, { desc = "Toggle terminals", silent = true })
--- vim.keymap.set({ "n", "t" }, "<leader>to", function()
---   term.open({ id = vim.v.count })
--- end, { desc = "Open terminal", silent = true })
--- vim.keymap.set({ "n", "t" }, "<leader>tc", function()
---   term.close({ id = vim.v.count })
--- end, { desc = "Close terminal", silent = true })
--- vim.keymap.set({ "n", "t" }, "<leader>tg", function()
---   if lazygit == nil then
---     lazygit = term.new({
---       cmd = "lg",
---       on_exit = function()
---         lazygit = nil
---       end
---     })
---   end
--- 
---   term.toggle({ id = lazygit.id })
--- end, { desc = "Toggle Lazy Git", silent = true })
+local lazygit = { term = nil, win = nil }
+-- local vimongo = nil
 
 vim.pack.add({
-  "https://github.com/akinsho/toggleterm.nvim",
+  "https://github.com/ssgabrieldev/term.nvim",
 }, { confirm = vim.g.vim_pack_add_force })
+local term = require("term")
 
-require("toggleterm").setup({
-  persist_size = false,
-  persist_mode = true,
-  shade_terminals = false,
-  winbar = {
-    enabled = false,
-    name_formatter = function(term)
-      local name = term.name
-      local tab_name = (term.display_name or name:match("^(.-);")) .. " [" .. term.id .. "]"
-      local win = vim.api.nvim_get_current_win()
-      local highlight = win == term.window and "%#NvimDapViewTabSelected#" or ""
+term.setup({})
 
-      return " " .. highlight .. "  " .. tab_name .. " "
-    end
-  },
-  float_opts = {
-    border = vim.g.border_style,
-    title_pos = "center",
-    winblend = 0,
-    width = function()
-      return vim.o.columns
-    end,
-    height = function()
-      return vim.o.lines
-    end,
-  },
-})
-
+vim.keymap.set({ "n", "t" }, "<leader>tn", function()
+  term.new_window({ id = vim.v.count })
+end, { desc = "New terminal window", silent = true })
 vim.keymap.set({ "n", "t" }, "<leader>tt", function()
-  vim.cmd(vim.v.count .. "ToggleTerm direction=horizontal")
-end, {
-  desc = "Toggle horizontal terminals",
-  silent = true
-})
-vim.keymap.set({ "n", "t" }, "<leader>tf", function()
-  vim.cmd(vim.v.count .. "ToggleTerm direction=float")
-end, { desc = "Toggle float terminals", silent = true })
+  term.toggle_windows()
+end, { desc = "Toggle terminals", silent = true })
+vim.keymap.set({ "n", "t" }, "<leader>to", function()
+  term.open({ id = vim.v.count })
+end, { desc = "Open terminal", silent = true })
 vim.keymap.set({ "n", "t" }, "<leader>tg", function()
-  local Terminal = require('toggleterm.terminal').Terminal
-
-  if lazygit == nil then
-    lazygit = Terminal:new({
+  if lazygit.term == nil then
+    lazygit.term = require("term.terminal"):new({
+      id = 1000,
       cmd = "lg",
-      hidden = true,
-      display_name = "Lazy Git",
-      direction = "float",
-      close_on_exit = true
+      on_exit = function()
+        lazygit.term = nil
+      end
     })
   end
 
-  lazygit:toggle()
+  if not lazygit.win then
+    lazygit.win = require("term.window"):new()
+    ---@diagnostic disable-next-line: undefined-field
+    lazygit.win:set_term(lazygit.term)
+  end
+
+  ---@diagnostic disable-next-line: undefined-field
+  lazygit.win:set_term(lazygit.term)
+  ---@diagnostic disable-next-line: undefined-field
+  lazygit.win:toggle()
 end, { desc = "Toggle Lazy Git", silent = true })
-vim.keymap.set({ "n", "t" }, "<leader>tv", function()
-  local Terminal = require('toggleterm.terminal').Terminal
 
-  if vimongo == nil then
-    vimongo = Terminal:new({
-      cmd = "vmd",
-      hidden = true,
-      display_name = "Vi Mongo",
-      direction = "float",
-      close_on_exit = true
-    })
-  end
-
-  vimongo:toggle()
-end, { desc = "Toggle Vi Mongo", silent = true })
+-- vim.pack.add({
+--   "https://github.com/akinsho/toggleterm.nvim",
+-- }, { confirm = vim.g.vim_pack_add_force })
+--
+-- require("toggleterm").setup({
+--   persist_size = false,
+--   persist_mode = true,
+--   shade_terminals = false,
+--   winbar = {
+--     enabled = false,
+--     name_formatter = function(term)
+--       local name = term.name
+--       local tab_name = (term.display_name or name:match("^(.-);")) .. " [" .. term.id .. "]"
+--       local win = vim.api.nvim_get_current_win()
+--       local highlight = win == term.window and "%#NvimDapViewTabSelected#" or ""
+--
+--       return " " .. highlight .. "  " .. tab_name .. " "
+--     end
+--   },
+--   float_opts = {
+--     border = vim.g.border_style,
+--     title_pos = "center",
+--     winblend = 0,
+--     width = function()
+--       return vim.o.columns
+--     end,
+--     height = function()
+--       return vim.o.lines
+--     end,
+--   },
+-- })
+--
+-- vim.keymap.set({ "n", "t" }, "<leader>tt", function()
+--   vim.cmd(vim.v.count .. "ToggleTerm direction=horizontal")
+-- end, {
+--   desc = "Toggle horizontal terminals",
+--   silent = true
+-- })
+-- vim.keymap.set({ "n", "t" }, "<leader>tf", function()
+--   vim.cmd(vim.v.count .. "ToggleTerm direction=float")
+-- end, { desc = "Toggle float terminals", silent = true })
+-- vim.keymap.set({ "n", "t" }, "<leader>tg", function()
+--   local Terminal = require('toggleterm.terminal').Terminal
+--
+--   if lazygit == nil then
+--     lazygit = Terminal:new({
+--       cmd = "lg",
+--       hidden = true,
+--       display_name = "Lazy Git",
+--       direction = "float",
+--       close_on_exit = true
+--     })
+--   end
+--
+--   lazygit:toggle()
+-- end, { desc = "Toggle Lazy Git", silent = true })
+-- vim.keymap.set({ "n", "t" }, "<leader>tv", function()
+--   local Terminal = require('toggleterm.terminal').Terminal
+--
+--   if vimongo == nil then
+--     vimongo = Terminal:new({
+--       cmd = "vmd",
+--       hidden = true,
+--       display_name = "Vi Mongo",
+--       direction = "float",
+--       close_on_exit = true
+--     })
+--   end
+--
+--   vimongo:toggle()
+-- end, { desc = "Toggle Vi Mongo", silent = true })
 
 -- STATUS LINE
 vim.pack.add({
