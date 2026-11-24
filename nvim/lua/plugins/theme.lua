@@ -3,10 +3,11 @@ vim.pack.add({ 'projekt0n/github-nvim-theme' })
 require('github-theme').setup({
   options = {
     transparent = true,
+    terminal_colors = false
   },
   groups = {
     all = {
-      CursorLine = { link = "Normal" }
+      CursorLine = false
     }
   }
 })
