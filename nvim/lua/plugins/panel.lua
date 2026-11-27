@@ -3,6 +3,9 @@ local border_style = vim.g.border_style
 
 -- LAYOUT
 local wo = { winfixbuf = nil, winbar = false, winhighlight = "", signcolumn = "no", sidescrolloff = 0 }
+local filter = function(_, win)
+  return vim.api.nvim_win_get_config(win).relative == ""
+end
 
 vim.pack.add({
   "https://github.com/folke/edgy.nvim",
@@ -16,13 +19,7 @@ require("edgy").setup({
     { ft = "NvimTree", wo = wo }
   },
   bottom = {
-    {
-      ft = "term-nvim",
-      wo = wo,
-      filter = function(_, win)
-        return vim.api.nvim_win_get_config(win).relative == ""
-      end,
-    },
+    { ft = "term-nvim",       wo = wo, filter = filter },
     { ft = "dap-view://main", wo = wo, },
     { ft = "dap-view-term",   wo = wo, },
     { ft = "dap-view",        wo = wo, },
@@ -31,7 +28,8 @@ require("edgy").setup({
     { ft = "help",            wo = wo, },
   },
   right = {
-    { ft = "codecompanion", wo = wo, },
+    { ft = "codecompanion", wo = wo, filter = filter },
+    { ft = "codecompanion_chat_input", wo = wo, size = { height = 4 }, filter = filter },
   },
   options = {
     left = {
@@ -148,7 +146,6 @@ end, { desc = "Close notifications", silent = true })
 
 -- TERMINAL
 local lazygit = { term = nil, win = nil }
--- local vimongo = nil
 
 vim.pack.add({
   "https://github.com/ssgabrieldev/term.nvim",
@@ -166,6 +163,9 @@ end, { desc = "Toggle terminals", silent = true })
 vim.keymap.set({ "n", "t" }, "<leader>to", function()
   term.open({ id = vim.v.count })
 end, { desc = "Open terminal", silent = true })
+vim.keymap.set({ "n", "t" }, "<leader>tp", function()
+  term.pick()
+end, { desc = "Pick terminal", silent = true })
 vim.keymap.set({ "n", "t" }, "<leader>tg", function()
   if lazygit.term == nil then
     lazygit.term = require("term.terminal"):new({
@@ -179,8 +179,6 @@ vim.keymap.set({ "n", "t" }, "<leader>tg", function()
 
   if not lazygit.win then
     lazygit.win = require("term.window"):new()
-    ---@diagnostic disable-next-line: undefined-field
-    lazygit.win:set_term(lazygit.term)
   end
 
   ---@diagnostic disable-next-line: undefined-field
@@ -359,7 +357,7 @@ require("codecompanion").setup({
   },
   interactions = {
     chat = {
-      adapter = "gemini",
+      adapter = "copilot",
     },
     inline = {
       adapter = "copilot",
@@ -370,15 +368,40 @@ require("codecompanion").setup({
   },
   opts = {
     log_level = "DEBUG"
+  },
+  display = {
+    chat = {
+      input = {
+        layout = "split",
+        height = 4
+      }
+    }
   }
 })
 
 vim.api.nvim_create_autocmd("User", {
-  pattern = "CodeCompanionRequestStarted",
-  callback = function()
-    vim.notify("Prompt started", "info", {
-      title = "Code Companion",
-    })
+  pattern = "CodeCompanionChatCreated",
+  callback = function(args)
+    local chat = require("codecompanion").buf_get_chat(args.data.bufnr)
+
+    chat:add_callback("on_submitted", function(chat, data)
+      vim.notify("Prompt started", "info", {
+        title = "Code Companion",
+      })
+    end)
+
+    chat:add_callback("on_completed", function(status, error)
+      if status == "error" then
+        vim.notify("Prompt error: " .. error, "error", {
+          title = "Code Companion",
+        })
+        return
+      end
+
+      vim.notify("Prompt response finished", "info", {
+        title = "Code Companion",
+      })
+    end)
   end,
 })
 
